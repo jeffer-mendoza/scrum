@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>BusinessProcesses list</h1>
+
+     <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for businessProcess in businessProcesses %}
+            <tr>
+                <td><a class="btn btn-default" href="{{ path('businessprocesses_show', { 'id': businessProcess.id }) }}">{{ businessProcess.id }}</a></td>
+                <td>{{ businessProcess.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="btn btn-default" href="{{ path('businessprocesses_show', { 'id': businessProcess.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-default" href="{{ path('businessprocesses_edit', { 'id': businessProcess.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-default" href="{{ path('businessprocesses_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

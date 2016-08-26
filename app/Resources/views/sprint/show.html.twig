@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sprint</h1>
+
+     <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sprint.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ sprint.name }}</td>
+            </tr>
+            <tr>
+                <th>Startdate</th>
+                <td>{% if sprint.startDate %}{{ sprint.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Duedate</th>
+                <td>{% if sprint.dueDate %}{{ sprint.dueDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-default" href="{{ path('sprint_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a class="btn btn-default" href="{{ path('sprint_edit', { 'id': sprint.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

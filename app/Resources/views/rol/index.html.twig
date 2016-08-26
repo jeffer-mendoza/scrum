@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Rol list</h1>
+
+     <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rol in rols %}
+            <tr>
+                <td><a class="btn btn-default" href="{{ path('rol_show', { 'id': rol.id }) }}">{{ rol.id }}</a></td>
+                <td>{{ rol.name }}</td>
+                <td>{{ rol.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="btn btn-default" href="{{ path('rol_show', { 'id': rol.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-default" href="{{ path('rol_edit', { 'id': rol.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn btn-default" href="{{ path('rol_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

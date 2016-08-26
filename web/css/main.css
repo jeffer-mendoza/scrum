@@ -1,0 +1,22 @@
+body{
+    background-color: #3a3f40;
+    color: white;
+}
+
+#left{
+    float:left;
+    width: 13%;
+    background-color: #333;
+    height: 100vh;
+}
+#rigth{
+    padding-left: 10px;
+    float:left;
+    width: 86%;
+    min-height:80vh
+}
+#footer{
+    clear:both;
+    /*margin-top: 80vh;*/
+}
+

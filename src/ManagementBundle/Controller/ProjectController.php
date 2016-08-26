@@ -33,6 +33,15 @@ class ProjectController extends Controller
         ));
     }
 
+    public function projectsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $projects = $em->getRepository('ManagementBundle:Project')->findAll();
+
+        return $this->render('project/projects.html.twig', array(
+            'projects' => $projects,
+        ));
+    }
+
     /**
      * Creates a new Project entity.
      *

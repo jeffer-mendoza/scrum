@@ -1,6 +1,6 @@
 body{
     background-color: #3a3f40;
-    color: white;
+    /*color: white;*/
 }
 
 #left{
@@ -13,7 +13,8 @@ body{
     padding-left: 10px;
     float:left;
     width: 86%;
-    min-height:80vh
+    min-height:80vh;
+    background-color: #fff;
 }
 #footer{
     clear:both;

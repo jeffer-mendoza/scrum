@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3 class="panel-title">{% block panel_title %}{% endblock %}</h3>
+                </div>
+                <div class="col-lg-4">
+                    {% block panel_actions %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            {% block panel_body %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

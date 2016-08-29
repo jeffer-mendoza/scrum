@@ -76,11 +76,14 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
+        $em = $this->getDoctrine()->getManager();
+        $stories = $em->getRepository('ManagementBundle:Story')->findAll();
         $deleteForm = $this->createDeleteForm($project);
 
         return $this->render('project/show.html.twig', array(
             'project' => $project,
             'delete_form' => $deleteForm->createView(),
+            'stories' => $stories,
         ));
     }
 

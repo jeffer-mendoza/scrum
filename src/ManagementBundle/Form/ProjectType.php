@@ -17,8 +17,8 @@ class ProjectType extends AbstractType
         $builder
             ->add('name',null,array ('attr'=>array('class'=>'form-control')))
             ->add('description',null,array ('attr'=>array('class'=>'form-control')))
-            ->add('startDate', 'datetime')
-            ->add('dueDate', 'datetime')
+            ->add('startDate',"date",array('widget' => 'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'form-control')))
+            ->add('dueDate', "date",array('widget' => 'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'form-control')))
         ;
     }
     

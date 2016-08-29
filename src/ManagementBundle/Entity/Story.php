@@ -424,4 +424,9 @@ class Story
     {
         return $this->rol;
     }
+
+    function __toString()
+    {
+        return $this->want;
+    }
 }

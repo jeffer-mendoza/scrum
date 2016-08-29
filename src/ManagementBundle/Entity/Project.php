@@ -170,4 +170,11 @@ class Project
     {
         return $this->dueDate;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

@@ -1,0 +1,4 @@
+api_projects:
+    type: rest
+    resource: "@ManagementBundle/Controller/ProjectController.php"
+    name_prefix:   api_

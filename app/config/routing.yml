@@ -1,28 +1,33 @@
-management_rol:
-    resource: "@ManagementBundle/Controller/RolController.php"
-    type:     annotation
+#management_rol:
+#    resource: "@ManagementBundle/Controller/RolController.php"
+#    type:     annotation
+#
+#management_activity:
+#    resource: "@ManagementBundle/Controller/ActivityController.php"
+#    type:     annotation
+#
+#management_business_processes:
+#    resource: "@ManagementBundle/Controller/BusinessProcessesController.php"
+#    type:     annotation
+#
+#management_sprint:
+#    resource: "@ManagementBundle/Controller/SprintController.php"
+#    type:     annotation
+#
+#management_story:
+#    resource: "@ManagementBundle/Controller/StoryController.php"
+#    type:     annotation
+#
+#management_project:
+#    resource: "@ManagementBundle/Controller/ProjectController.php"
+#    type:     annotation
 
-management_activity:
-    resource: "@ManagementBundle/Controller/ActivityController.php"
-    type:     annotation
+#management:
+#    resource: "@ManagementBundle/Resources/config/routing.yml"
+#    prefix:   /
 
-management_business_processes:
-    resource: "@ManagementBundle/Controller/BusinessProcessesController.php"
-    type:     annotation
-
-management_sprint:
-    resource: "@ManagementBundle/Controller/SprintController.php"
-    type:     annotation
-
-management_story:
-    resource: "@ManagementBundle/Controller/StoryController.php"
-    type:     annotation
-
-management_project:
-    resource: "@ManagementBundle/Controller/ProjectController.php"
-    type:     annotation
-
-management:
-    resource: "@ManagementBundle/Resources/config/routing.yml"
-    prefix:   /
+scrum_api:
+    type:    rest
+    prefix:  /api
+    resource: "@ManagementBundle/Resources/config/api-routing.yml"
 

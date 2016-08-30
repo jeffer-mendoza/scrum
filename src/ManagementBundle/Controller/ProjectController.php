@@ -12,14 +12,11 @@ use ManagementBundle\Form\ProjectType;
 /**
  * Project controller.
  *
- * @Route("/project")
  */
 class ProjectController extends Controller
 {
     /**
      * Lists all Project entities.
-     *
-     * @Route("/", name="project_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -28,12 +25,16 @@ class ProjectController extends Controller
 
         $projects = $em->getRepository('ManagementBundle:Project')->findAll();
 
-        return $this->render('project/index.html.twig', array(
+//        return $this->render('project/index.html.twig', array(
+//            'projects' => $projects,
+//        ));
+        return array(
             'projects' => $projects,
-        ));
+        );
     }
 
-    public function projectsAction(){
+    public function projectsAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $projects = $em->getRepository('ManagementBundle:Project')->findAll();
 
@@ -45,7 +46,7 @@ class ProjectController extends Controller
     /**
      * Creates a new Project entity.
      *
-     * @Route("/new", name="project_new")
+     * @Route(requirements={"_format"="json|xml"})
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -71,7 +72,7 @@ class ProjectController extends Controller
     /**
      * Finds and displays a Project entity.
      *
-     * @Route("/{id}", name="project_show")
+     * @Route(requirements={"_format"="json|xml"})
      * @Method("GET")
      */
     public function showAction(Project $project)
@@ -90,7 +91,7 @@ class ProjectController extends Controller
     /**
      * Displays a form to edit an existing Project entity.
      *
-     * @Route("/{id}/edit", name="project_edit")
+     * @Route(requirements={"_format"="json|xml"})
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Project $project)
@@ -117,7 +118,7 @@ class ProjectController extends Controller
     /**
      * Deletes a Project entity.
      *
-     * @Route("/{id}", name="project_delete")
+     * @Route(requirements={"_format"="json|xml"})
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Project $project)
@@ -146,7 +147,6 @@ class ProjectController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

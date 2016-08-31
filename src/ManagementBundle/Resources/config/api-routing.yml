@@ -1,4 +1,12 @@
 api_projects:
     type: rest
     resource: "@ManagementBundle/Controller/ProjectController.php"
-    name_prefix:   api_
+    name_prefix:   api_project_
+    prefix:    project
+
+api_stories:
+    type: rest
+    resource: "@ManagementBundle/Controller/StoryController.php"
+    name_prefix:   api_story_
+    prefix:    story
+

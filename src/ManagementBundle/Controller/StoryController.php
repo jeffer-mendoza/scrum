@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ManagementBundle\Entity\Story;
 use ManagementBundle\Form\StoryType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Story controller.
@@ -28,9 +29,12 @@ class StoryController extends Controller
 
         $stories = $em->getRepository('ManagementBundle:Story')->findAll();
 
-        return $this->render('story/index.html.twig', array(
-            'stories' => $stories,
-        ));
+//        return $this->render('story/index.html.twig', array(
+//            'stories' => $stories,
+//        ));
+        $serializer = $this->get('jms_serializer');
+        $stories = $serializer->serialize($stories, 'json');
+        return new Response($stories);
     }
 
     /**

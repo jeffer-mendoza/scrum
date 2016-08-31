@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ManagementBundle\Entity\Project;
 use ManagementBundle\Form\ProjectType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Project controller.
@@ -27,10 +28,15 @@ class ProjectController extends Controller
 
 //        return $this->render('project/index.html.twig', array(
 //            'projects' => $projects,
-//        ));
-        return array(
-            'projects' => $projects,
-        );
+//        ));{"projects":[[]]}
+//        return array(
+//            'projects' => $projects,
+//        );
+//        echo count($projects[0]->getStories());
+//        exit;
+        $serializer = $this->get('jms_serializer');
+        $projects = $serializer->serialize($projects, 'json');
+        return new Response($projects);
     }
 
     public function projectsAction()

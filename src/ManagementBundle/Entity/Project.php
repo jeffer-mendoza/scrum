@@ -52,7 +52,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Story", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Story", mappedBy="project", cascade={"all"}, fetch="EAGER")
      */
     private $stories;
 
@@ -175,6 +175,57 @@ class Project
     {
         return $this->name;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getStories()
+    {
+        return $this->stories;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $stories
+     */
+    public function setStories($stories)
+    {
+        $this->stories = $stories;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSprints()
+    {
+        return $this->sprints;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $sprints
+     */
+    public function setSprints($sprints)
+    {
+        $this->sprints = $sprints;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
+
+
 
 
 }

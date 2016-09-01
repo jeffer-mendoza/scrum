@@ -46,7 +46,7 @@ class Sprint
      * @var \ManagementBundle\Entity\Project
      *
      * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Project", inversedBy="sprints")
-     * @ORM\JoinColumn(name="story", referencedColumnName="id")
+     * @ORM\JoinColumn(name="project", referencedColumnName="id")
      */
     private $project;
 

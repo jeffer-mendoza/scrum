@@ -29,11 +29,6 @@ class ProjectController extends Controller
 //        return $this->render('project/index.html.twig', array(
 //            'projects' => $projects,
 //        ));{"projects":[[]]}
-//        return array(
-//            'projects' => $projects,
-//        );
-//        echo count($projects[0]->getStories());
-//        exit;
         $serializer = $this->get('jms_serializer');
         $projects = $serializer->serialize($projects, 'json');
         return new Response($projects);

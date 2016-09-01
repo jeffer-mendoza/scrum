@@ -59,7 +59,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Sprint", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Sprint", mappedBy="project", cascade={"all"}, fetch="EAGER")
      */
     private $sprints;
 

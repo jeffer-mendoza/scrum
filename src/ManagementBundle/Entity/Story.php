@@ -25,6 +25,13 @@ class Story
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="string", length=40, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="want", type="string", length=255)
      */
     private $want;
@@ -32,7 +39,7 @@ class Story
     /**
      * @var string
      *
-     * @ORM\Column(name="soThat", type="string", length=255)
+     * @ORM\Column(name="so_that", type="string", length=255)
      */
     private $soThat;
 
@@ -170,6 +177,29 @@ class Story
     public function getWant()
     {
         return $this->want;
+    }
+
+    /**
+     * Set want
+     *
+     * @param string $title
+     * @return Story
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get want
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**

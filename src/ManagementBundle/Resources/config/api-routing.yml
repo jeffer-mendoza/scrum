@@ -5,8 +5,8 @@ api_projects:
     prefix:    project
 
 api_stories:
-    type: rest
+    type: annotation
     resource: "@ManagementBundle/Controller/StoryController.php"
     name_prefix:   api_story_
-    prefix:    story
+#    prefix:    story
 

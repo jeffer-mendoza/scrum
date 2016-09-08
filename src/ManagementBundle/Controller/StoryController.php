@@ -20,7 +20,7 @@ class StoryController extends Controller
     /**
      * Lists all Story entities.
      *
-     * @Route("/", name="story_index")
+     * @Route("/index", name="story_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -40,27 +40,20 @@ class StoryController extends Controller
     /**
      * Creates a new Story entity.
      *
-     * @Route("/new", name="story_new")
-     * @Method({"GET", "POST"})
+     * @Route("/index", name="story_new")
+     * @Method("POST")
      */
     public function newAction(Request $request)
     {
+        var_dump($request);
+        exit;
         $story = new Story();
-        $form = $this->createForm('ManagementBundle\Form\StoryType', $story);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($story);
+        $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($story);
-            $em->flush();
+        return new Response();
 
-            return $this->redirectToRoute('story_show', array('id' => $story->getId()));
-        }
-
-        return $this->render('story/new.html.twig', array(
-            'story' => $story,
-            'form' => $form->createView(),
-        ));
     }
 
     /**
@@ -138,7 +131,6 @@ class StoryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('story_delete', array('id' => $story->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

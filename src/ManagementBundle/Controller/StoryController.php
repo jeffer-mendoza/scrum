@@ -45,9 +45,12 @@ class StoryController extends Controller
      */
     public function newAction(Request $request)
     {
-        var_dump($request);
-        exit;
+//        var_dump($request->getContent());
         $story = new Story();
+        $serializer = $this->get('jms_serializer');
+        $story = $serializer->deserialize($request->getContent(), 'ManagementBundle\Entity\Story','json');
+        var_dump($story);
+        exit;
         $em = $this->getDoctrine()->getManager();
         $em->persist($story);
         $em->flush();

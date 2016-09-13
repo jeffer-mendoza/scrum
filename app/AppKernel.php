@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new ManagementBundle\ManagementBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
         );
 

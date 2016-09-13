@@ -8,5 +8,9 @@ api_stories:
     type: annotation
     resource: "@ManagementBundle/Controller/StoryController.php"
     name_prefix:   api_story_
+api_stories:
+    type: annotation
+    resource: "@ManagementBundle/Controller/SprintController.php"
+    name_prefix:   api_sprint_
 #    prefix:    story
 

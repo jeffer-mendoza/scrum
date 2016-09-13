@@ -58,6 +58,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -75,3 +76,10 @@ fos_rest:
     format_listener:
         rules:
             - { path: ^/api, priorities: [ json ], fallback_format: json, prefer_extension: true }
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []
+    temporary_folder: %kernel.cache_dir%/snappy

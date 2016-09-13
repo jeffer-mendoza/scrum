@@ -18,7 +18,7 @@ class Story
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -97,7 +97,7 @@ class Story
     /**
      * @var \ManagementBundle\Entity\Project
      *
-     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Project", inversedBy="stories")
+     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Project", inversedBy="stories", fetch="EAGER")
      * @ORM\JoinColumn(name="project", referencedColumnName="id")
      */
     private $project;
@@ -154,6 +154,19 @@ class Story
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set want
+     *
+     * @param integer $id
+     * @return Story
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 class StoryController extends Controller
 {
     /**
-     * Lists all Story entities.
+     * get all user story
      *
      * @Route("/index", name="story_index")
      * @Method("GET")
@@ -28,10 +28,6 @@ class StoryController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $stories = $em->getRepository('ManagementBundle:Story')->findAll();
-
-//        return $this->render('story/index.html.twig', array(
-//            'stories' => $stories,
-//        ));
         $serializer = $this->get('jms_serializer');
         $stories = $serializer->serialize($stories, 'json');
         return new Response($stories);
@@ -45,62 +41,42 @@ class StoryController extends Controller
      */
     public function newAction(Request $request)
     {
-//        var_dump($request->getContent());
         $story = new Story();
-        $serializer = $this->get('jms_serializer');
-        $story = $serializer->deserialize($request->getContent(), 'ManagementBundle\Entity\Story','json');
-        var_dump($story);
-        exit;
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($story);
-        $em->flush();
-
-        return new Response();
-
+        try {
+            $serializer = $this->get('jms_serializer');
+            $story = $serializer->deserialize($request->getContent(), get_class($story), 'json');
+            $em = $this->getDoctrine()->getManager();
+            $em->merge($story);
+            $em->flush();
+            return new Response($story->getId());
+        } catch (\Exception $ex) {
+            var_dump($request->getContent());
+            return new Response($ex->getMessage());
+        }
     }
 
     /**
-     * Finds and displays a Story entity.
+     * Creates a new Story entity.
      *
-     * @Route("/{id}", name="story_show")
-     * @Method("GET")
+     * @Route("/edit", name="story_edit")
+     * @Method("POST")
      */
-    public function showAction(Story $story)
+    public function editAction(Request $request)
     {
-        $deleteForm = $this->createDeleteForm($story);
-
-        return $this->render('story/show.html.twig', array(
-            'story' => $story,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing Story entity.
-     *
-     * @Route("/{id}/edit", name="story_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editAction(Request $request, Story $story)
-    {
-        $deleteForm = $this->createDeleteForm($story);
-        $editForm = $this->createForm('ManagementBundle\Form\StoryType', $story);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        $story = new Story();
+        try {
+            $serializer = $this->get('jms_serializer');
+            $story = $serializer->deserialize($request->getContent(), get_class($story), 'json');
             $em = $this->getDoctrine()->getManager();
             $em->persist($story);
             $em->flush();
-
-            return $this->redirectToRoute('story_edit', array('id' => $story->getId()));
+            return new Response($story->getId());
+        } catch (\Exception $ex) {
+            var_dump($request->getContent());
+            return new Response($ex->getMessage());
         }
-
-        return $this->render('story/edit.html.twig', array(
-            'story' => $story,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
+
 
     /**
      * Deletes a Story entity.
@@ -110,30 +86,33 @@ class StoryController extends Controller
      */
     public function deleteAction(Request $request, Story $story)
     {
-        $form = $this->createDeleteForm($story);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($story);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($story);
+        $em->flush();
 
         return $this->redirectToRoute('story_index');
     }
 
+
     /**
-     * Creates a form to delete a Story entity.
-     *
-     * @param Story $story The Story entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/pdf/{id}", name="story_pdf")
+     * @method({"GET"})
+     * @param Story $story
+     * @return Response
      */
-    private function createDeleteForm(Story $story)
+    public function pdfAction(Story $story)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('story_delete', array('id' => $story->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
+        $html = $this->renderView(':story:pdf.html.twig', array(
+            'story' => $story
+        ));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="file.pdf"'
+            )
+        );
     }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ManagementBundle\Entity\Sprint;
 use ManagementBundle\Form\SprintType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Sprint controller.
@@ -27,10 +28,10 @@ class SprintController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $sprints = $em->getRepository('ManagementBundle:Sprint')->findAll();
+        $serializer = $this->get('jms_serializer');
+        $stories = $serializer->serialize($sprints, 'json');
 
-        return $this->render('sprint/index.html.twig', array(
-            'sprints' => $sprints,
-        ));
+        return new Response($sprints);
     }
 
     /**
@@ -59,21 +60,6 @@ class SprintController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Sprint entity.
-     *
-     * @Route("/{id}", name="sprint_show")
-     * @Method("GET")
-     */
-    public function showAction(Sprint $sprint)
-    {
-        $deleteForm = $this->createDeleteForm($sprint);
-
-        return $this->render('sprint/show.html.twig', array(
-            'sprint' => $sprint,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing Sprint entity.
@@ -110,31 +96,10 @@ class SprintController extends Controller
      */
     public function deleteAction(Request $request, Sprint $sprint)
     {
-        $form = $this->createDeleteForm($sprint);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($sprint);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($sprint);
+        $em->flush();
 
         return $this->redirectToRoute('sprint_index');
-    }
-
-    /**
-     * Creates a form to delete a Sprint entity.
-     *
-     * @param Sprint $sprint The Sprint entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Sprint $sprint)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('sprint_delete', array('id' => $sprint->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 }

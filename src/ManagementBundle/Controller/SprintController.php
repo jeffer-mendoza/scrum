@@ -34,6 +34,20 @@ class SprintController extends Controller
     }
 
     /**
+     * Es llamado desde el menu izquierdo para setear los sprints en este panel
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sprintsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $sprints = $em->getRepository('ManagementBundle:Sprint')->findAll();
+
+        return $this->render('sprint/sprints.html.twig', array(
+            'sprints' => $sprints,
+        ));
+    }
+
+    /**
      * Creates a new Sprint entity.
      *
      * @Route("/new", name="sprint_new")

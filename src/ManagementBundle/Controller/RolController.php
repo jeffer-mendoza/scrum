@@ -50,7 +50,7 @@ class RolController extends Controller
             $em->persist($rol);
             $em->flush();
 
-            return $this->redirectToRoute('rol_show', array('id' => $rol->getId()));
+            return $this->redirectToRoute('rol_index', array('id' => $rol->getId()));
         }
 
         return $this->render('rol/new.html.twig', array(
@@ -59,21 +59,6 @@ class RolController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Rol entity.
-     *
-     * @Route("/{id}", name="rol_show")
-     * @Method("GET")
-     */
-    public function showAction(Rol $rol)
-    {
-        $deleteForm = $this->createDeleteForm($rol);
-
-        return $this->render('rol/show.html.twig', array(
-            'rol' => $rol,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing Rol entity.

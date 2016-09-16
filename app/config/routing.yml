@@ -1,3 +1,7 @@
+management_story_information:
+    resource: "@ManagementBundle/Controller/StoryInformationController.php"
+    type:     annotation
+
 management_rol:
     resource: "@ManagementBundle/Controller/RolController.php"
     type:     annotation
@@ -20,6 +24,10 @@ management_story:
 
 management_project:
     resource: "@ManagementBundle/Controller/ProjectController.php"
+    type:     annotation
+
+management_report:
+    resource: "@ManagementBundle/Controller/ReportController.php"
     type:     annotation
 
 management:

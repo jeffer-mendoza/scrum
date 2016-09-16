@@ -3,11 +3,11 @@
 {% block panel_title %}
     <h1>{{ project.id }} -> {{ project.name }}</h1>
     <h3>{{ project.description }}</h3>
-    <h4>{% if project.startDate %}{{ project.startDate|date('Y-m-d H:i:s') }}{% endif %}</h4>
-    <h4>{% if project.dueDate %}{{ project.dueDate|date('Y-m-d H:i:s') }}{% endif %}</h4>
+    <h4>{% if project.startDate %}{{ project.startDate|date('d-M-Y H:i:s') }}{% endif %}</h4>
+    <h4>{% if project.dueDate %}{{ project.dueDate|date('d-M-Y H:i:s') }}{% endif %}</h4>
 {% endblock %}
 {% block panel_actions %}
-    <a class="btn btn-default" href="{{ path('project_index') }}">Back to the list</a>
+    <a class="btn btn-default" href="{{ path('project_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
 
     <a class="btn btn-default" href="{{ path('project_edit', { 'id': project.id }) }}">Edit</a>
 
@@ -42,11 +42,11 @@
                 <td>{{ story.priority }}</td>
                 <td>{{ story.status }}</td>
                 <td>{{ story.effort }}</td>
-                <td>{% if story.startDate %}{{ story.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if story.dueDate %}{{ story.dueDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>
+                <td>{% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i:s') }}{% endif %}</td>
                 <td>
-                    <a class="btn btn-default" href="{{ path('story_show', { 'id': story.id }) }}">show</a>
-                    <a class="btn btn-default" href="{{ path('story_edit', { 'id': story.id }) }}">go</a>
+                    <a class="btn btn-default" href="{{ path('story_show', { 'id': story.id }) }}"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-default" href="{{ path('story_edit', { 'id': story.id }) }}"><i  class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% endfor %}

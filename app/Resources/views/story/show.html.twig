@@ -1,56 +1,274 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Story</h1>
+{% block panel_actions %}
+    <a class="btn" href="{{ path('story_index') }}"><i class="fa fa-arrow-left"
+                                                       aria-hidden="true"></i> </a>
 
-     <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ story.id }}</td>
-            </tr>
-            <tr>
-                <th>Want</th>
-                <td>{{ story.want }}</td>
-            </tr>
-            <tr>
-                <th>Sothat</th>
-                <td>{{ story.soThat }}</td>
-            </tr>
-            <tr>
-                <th>Priority</th>
-                <td>{{ story.priority }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ story.status }}</td>
-            </tr>
-            <tr>
-                <th>Effort</th>
-                <td>{{ story.effort }}</td>
-            </tr>
-            <tr>
-                <th>Startdate</th>
-                <td>{% if story.startDate %}{{ story.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Duedate</th>
-                <td>{% if story.dueDate %}{{ story.dueDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
+    <a class="btn" href="{{ path('report_story_pdf', {'id': story.id}) }}"><i class="fa fa-file-pdf-o"></i> </a>
+    <a class="btn" href="{{ path('story_edit', { 'id': story.id }) }}">Edit</a>
+    {{ form_start(delete_form) }}
+    <input class="waves-effect waves-light btn" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+{% endblock %}
+{% block panel_body %}
+    <table class="bordered striped">
+        <tr>
+            <td colspan="6"><h1>{{ story.id }} - {{ story.title }}</h1></td>
+        </tr>
+        <tr>
+            <th>Priority</th>
+            <td>{{ story.strpriority }}</td>
+            <th>Effort(hrs)</th>
+            <td>{{ story.effort }}</td>
+            <th>Status</th>
+            <td>{{ story.strstatus }}</td>
+        </tr>
+        <tr>
+            <th>Start Date</th>
+            <td>{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>
+            <th>Due Date</th>
+            <td colspan="4"> {% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Sprint</th>
+            <td colspan="5">{{ story.sprint }}</td>
+        </tr>
+        <tr>
+            <th>Want</th>
+            <td colspan="5">{{ story.want }}</td>
+        </tr>
     </table>
+{% endblock %}
 
-    <ul>
+{% block footer_panel %}
+    <ul class="collapsible" data-collapsible="accordion">
         <li>
-            <a class="btn btn-default" href="{{ path('story_index') }}">Back to the list</a>
+            <div class="collapsible-header"><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
+            <div class="collapsible-body">
+                <table id="acceptance" class="bordered striped">
+                    <tbody>
+                    {% for acceptance in story.acceptanceRequirements %}
+                        <tr>
+                            <td>{{ acceptance.description }}</td>
+                            <td>{{ acceptance.stracceptance }}</td>
+                            <td>
+                                <a class="btn" href="{{ path('acceptance_requirement_delete', { 'id': acceptance.id }) }}"><i
+                                            class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                <tr>
+                    <td colspan="3">
+                        <input id="save-acceptance-requirement" data-story="{{ story.id }}"
+                               data-url="{{ path('acceptancerequirement_new') }}" name="description"
+                               placeholder="Typing a new Acceptence Requirement...">
+                    </td>
+                </tr>
+            </div>
         </li>
         <li>
-            <a class="btn btn-default" href="{{ path('story_edit', { 'id': story.id }) }}">Edit</a>
+            <div class="collapsible-header"><i class="fa fa-tasks"></i>Tasks and Efforts</div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="col s6">
+                        <table id="tasks" class="bordered striped">
+                            <tbody>
+                            {% for task in story.tasks %}
+                                <tr>
+                                    <td>{{ task.description }}</td>
+                                    <td>{{ task.status }}</td>
+                                    <td>
+                                        <a class="btn" href="{{ path('task_delete', { 'id': task.id }) }}"><i
+                                                    class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <tr>
+                            <td colspan="3">
+                                <input id="save-task" data-story="{{ story.id }}"
+                                       data-url="{{ path('task_new') }}" name="description"
+                                       placeholder="Typing a new Task...">
+                            </td>
+                        </tr>
+                    </div>
+                    <div class="col s6">
+                        <table id="efforts" class="bordered striped">
+                            <tbody>
+                            {% for effort in story.spendEfforts %}
+                                <tr>
+                                    <td>{% if effort.date %}{{ effort.date|date('d-M-Y H:i:s') }}{% endif %}</td>
+                                    <td>{{ effort.effort }}h</td>
+
+                                    <td>
+                                        <a class="btn" href="{{ path('spend_effort_delete', { 'id': effort.id }) }}"><i
+                                                    class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col s5">
+                                        <input id="save-effort-date" type="datetime-local" value="2016-09-01T12:00">
+                                    </div>
+                                    <div class="col s5">
+                                        <select id="save-effort-effort">
+                                            <option value="0" disabled selected>Select Spend Effort...</option>
+                                            <option value="1">1h</option>
+                                            <option value="2">2h</option>
+                                            <option value="4">4h</option>
+                                            <option value="8">8h</option>
+                                            <option value="16">16h</option>
+                                        </select>
+                                    </div>
+                                    <div class="col s2">
+                                        <button id="save-effort" data-story="{{ story.id }}" data-url="{{ path('spend_effort_new') }}" class="btn"><i class="fa fa-save"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+            </div>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <div class="collapsible-header"><i class="fa fa-commenting"></i>First</div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="col s12">
+                        <table id="comments" class="bordered striped">
+                            <tbody>
+                            {% for comment in story.comments %}
+                                <tr>
+                                    <td>{{ comment.detail }}</td>
+                                    <td>
+                                        <a class="btn" href="{{ path('comment_delete', { 'id': comment.id }) }}"><i
+                                                    class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <tr>
+                            <td colspan="2">
+                                <input id="save-comment" data-story="{{ story.id }}"
+                                       data-url="{{ path('comment_new') }}" name="description"
+                                       placeholder="Typing a new Comment...">
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+            </div>
         </li>
     </ul>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        //        acceptance-requirement
+        $('#save-acceptance-requirement').keypress(function (e) {
+            if (e.which != 13) {
+                return 0;
+            }
+            $.ajax({
+                url: $('#save-acceptance-requirement').data('url'),
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    description: $('#save-acceptance-requirement').val(),
+                    story: $('#save-acceptance-requirement').data('story')
+                }),
+                error: function () {
+                    console.log("ocurred an error");
+                },
+                success: function (data) {
+                    $('#acceptance').append(
+                            '<tr><td>' + $("#save-acceptance-requirement").val() + '</td>' +
+                            '<td>NO ACEPTADO</td></tr>');
+                    $('#save-acceptance-requirement').val('');
+                }
+            });
+        });
+
+        //        comments
+        $('#save-comment').keypress(function (e) {
+            if (e.which != 13) {
+                return 0;
+            }
+            $.ajax({
+                url: $('#save-comment').data('url'),
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    detail: $('#save-comment').val(),
+                    story: $('#save-comment').data('story')
+                }),
+                error: function () {
+                    console.log("ocurred an error");
+                },
+                success: function (data) {
+                    console.log('ento');
+                    $('#comments').append('<tr><td>' + $("#save-comment").val() + '</td></tr>');
+                    $('#save-comment').val('');
+                }
+            });
+        });
+
+        //        task
+        $('#save-task').keypress(function (e) {
+            if (e.which != 13) {
+                return 0;
+            }
+            $.ajax({
+                url: $('#save-task').data('url'),
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    description: $('#save-task').val(),
+                    story: $('#save-task').data('story')
+                }),
+                error: function () {
+                    console.log("ocurred an error");
+                },
+                success: function (data) {
+                    console.log('ento');
+                    $('#tasks').append('<tr><td>' + $("#save-task").val() + '</td></tr>');
+                    $('#save-task').val('');
+                }
+            });
+        });
+
+        //comments
+        $('#save-effort').click(function (e) {
+            if ($('#save-effort-effort').val() == null) {
+                return 0;
+            }
+            $.ajax({
+                url: $('#save-effort').data('url'),
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    date: $('#save-effort-date').val(),
+                    effort: $('#save-effort-effort').val(),
+                    story: $('#save-effort').data('story')
+                }),
+                error: function () {
+                    console.log("ocurred an error");
+                },
+                success: function (data) {
+                    console.log('ento');
+                    $('#efforts').append('<tr><td>' + $("#save-effort-date").val() + '</td><td>'+$("#save-effort-effort").val()+'h<td></tr>');
+                    $('#save-effort-effort').val('');
+                }
+            });
+        });
+    </script>
 {% endblock %}

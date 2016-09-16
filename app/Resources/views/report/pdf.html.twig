@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GDE {{ story.id }}{% endblock %}
+{% block stylesheet %}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+          crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    <div style="width: 793px; height: 1000px; font-family: Arial, 'Times New Roman'">
+        <table class="table table-responsive">
+            <tr>
+                <td colspan="1">
+                    <img src="http://www.univalle.edu.co/english/simbolos/logos/imagenes/univalle-rojopuro-159x226.gif"
+                         class="img-responsive" width="80">
+                </td>
+                <td class="text-center" colspan="5">
+                    <strong style="font-size: 26px">Sistema Para la Gestión de Documentos Electrónicos</strong><br/>
+                    <strong style="font-size: 22px">Área de Registro Académico</strong><br/>
+                    <strong style="font-size: 20px">Historia de Usuario</strong><br/>
+                </td>
+            </tr>
+        </table>
+        <table id="detail" class="table table-bordered table-striped table-responsive">
+            <tr>
+                <td><h4>GDE{{ story.id }}</h4></td>
+                <td style="text-align: center" colspan="5"><h4>{{ story.title }}</h4></td>
+            </tr>
+            <tr>
+                <th>Prioridad</th>
+                <td class="text-center">{{ story.strpriority }}</td>
+                <th class="text-center">Esfuerzo</th>
+                <td class="text-center">{{ story.effort }} horas</td>
+                <th class="text-center">Estado</th>
+                <td class="text-center">{{ story.strstatus }}</td>
+            </tr>
+            <tr>
+                <th>Sprint</th>
+                <td class="text-center" colspan="1">{{ story.sprint }}</td>
+                <th class="text-center">Fecha de Inicio</th>
+                <td class="text-center" colspan="1">{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>
+                <th class="text-center">Fecha Vencimiento</th>
+                <td class="text-center" colspan="1"> {% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Rol</th>
+                <td colspan="5">{{ story.rol }}</td>
+            </tr>
+            <tr style="height: 80px">
+                <th>Deseo</th>
+                <td colspan="6">{{ story.want }}</td>
+            </tr>
+            <tr style="height: 80px">
+                <th>Proposito</th>
+                <td colspan="5">{{ story.soThat }}</td>
+            </tr>
+            <tr>
+                <th class="text-center" colspan="6">Criterios de Aceptación</th>
+            </tr>
+            <tr>
+                {% if story.comments|length > 0 %}
+                    <th colspan="5">Descripción</th>
+                    <th colspan="1">Estado</th>
+                {% else %}
+                    <td class="text-center" colspan="6">Sin criterios de aceptación</td>
+                {% endif %}
+            </tr>
+            <tbody>
+            {% for acceptance in story.acceptanceRequirements %}
+                <tr>
+                    <td colspan="5">{{ acceptance.description }}</td>
+                    <td colspan="1">{{ acceptance.stracceptance }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th class="text-center" colspan="6">Esfuerzo Requerido</th>
+            </tr>
+            <tr>
+                {% if story.comments|length > 0 %}
+                    <th colspan="1">Esfuerzo(hrs)</th>
+                    <th colspan="5">Fecha</th>
+                {% else %}
+                    <td class="text-center" colspan="6">Sin esfuerzos requeridos</td>
+                {% endif %}
+            </tr>
+            {% for effort in story.spendEfforts %}
+                <tr>
+                    <td colspan="1">{{ effort.effort }}</td>
+                    <td colspan="5">{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th class="text-center" colspan="6">Comentarios</th>
+            </tr>
+            <tr>
+                {% if story.comments|length > 0 %}
+                    <th colspan="6">Detalle</th>
+                {% else %}
+                    <td class="text-center" colspan="6">Sin comentarios</td>
+                {% endif %}
+            </tr>
+            {% for comment in story.comments %}
+                <tr>
+                    <td colspan="6">{{ comment.detail }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div style="width: 793px;font-family: Arial, 'Times New Roman'">
+        <table class="table table-responsive table-bordered table-striped">
+            <tr>
+                <td colspan="2">
+                    <div class="row">
+                        <div class="col-sm-12">Encargado:</div>
+                        <div class="col-sm-12 text-center"><strong>Jefferson Estiven Mendoza</strong></div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="row">
+                        <div class="col-sm-12">Revisado por:</div>
+                        <div class="col-sm-12 text-center"><strong>Luz Milena Riascos</strong></div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="row">
+                        <div class="col-sm-12">Aprobado por:</div>
+                        <div class="col-sm-12 text-center"><strong>Raúl Andrés Ramirez</strong></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p style="font-size: 9.5px">
+            Escuela de Ingeniería de Sistemas y Computación - Universidad del Valle<br/>
+            Trabajo de Grado: Sistema Para la Gestión de Documentos Electrónicos - Jefferson Estiven Mendoza<br/>
+            Santiago de Cali 2016 - 2017
+        </p>
+    </div>
+    <style>
+        #detail td{
+            width: 16.6%;
+        }
+    </style>
+{% endblock %}

@@ -1,51 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Story list</h1>
+{% block panel_title %}Backlogs{% endblock %}
+{% block panel_actions %}
+    <a class="btn btn-default" href="{{ path('story_new') }}">Create a new entry</a>
+{% endblock %}
 
-     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Want</th>
-                <th>Sothat</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Effort</th>
-                <th>Startdate</th>
-                <th>Duedate</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    {% block th %}
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Effort</th>
+        <th>Startdate</th>
+        <th>Duedate</th>
+    {% endblock %}
+
+    {% block td %}
         {% for story in stories %}
             <tr>
-                <td><a class="btn btn-default" href="{{ path('story_show', { 'id': story.id }) }}">{{ story.id }}</a></td>
-                <td>{{ story.want }}</td>
-                <td>{{ story.soThat }}</td>
+                <td>{{ story.title }}</td>
                 <td>{{ story.priority }}</td>
                 <td>{{ story.status }}</td>
                 <td>{{ story.effort }}</td>
-                <td>{% if story.startDate %}{{ story.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if story.dueDate %}{{ story.dueDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i') }}{% endif %}</td>
+                <td>{% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a class="btn btn-default" href="{{ path('story_show', { 'id': story.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a class="btn btn-default" href="{{ path('story_edit', { 'id': story.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="waves-effect waves-light btn" href="{{ path('story_show', { 'id': story.id }) }}"><i
+                                class="fa fa-eye"></i></a>
+                    <a class="waves-effect waves-light btn" href="{{ path('story_edit', { 'id': story.id }) }}"><i
+                                class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a class="btn btn-default" href="{{ path('story_new') }}">Create a new entry</a>
-        </li>
-    </ul>
-{% endblock %}
+    {% endblock %}

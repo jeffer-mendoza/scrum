@@ -2,62 +2,66 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}SCRUM{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">INVEST</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Project<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo right">SCRUM</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li class="active"><a href="{{ path('story_index') }}">Backlogs</a></li>
+            <li><a href="{{ path('sprint_index') }}">Sprint</a></li>
+            <li><a href="{{ path('rol_index') }}">Role</a></li>
+            <li><a href="{{ path('management_homepage') }}">Board</a></li>
+            <li><a href="{{ path('report_index') }}">Report</a></li>
+        </ul>
+    </div>
 </nav>
-<div id="left">
-    <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
-        <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Projects <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                {{ render(controller('ManagementBundle:Project:projects')) }}
-            </ul>
-        </li>
-    </ul>
-</div>
-<div id="rigth">
-    {% block body %}
+<div class="row">
+    <div class="col s2">
+        <ul class="collection">
+            {{ render(controller('ManagementBundle:Sprint:sprints')) }}
+        </ul>
+    </div>
+    <div class="col s10">
+        {% block body %}
 
-    {% endblock %}
+        {% endblock %}
+    </div>
 </div>
-<footer id="footer" class="text-center">&copy; <a href="http://registro.univalle.edu.co/" target="_blank">Jefferson Mendoza</a>, Derechos Reservados
-</footer>
+{% endblock content %}
 
-<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+{#<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>#}
+{% block stylesheet %}
 <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+      crossorigin="anonymous">
 <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script>$('.dropdown-toggle').dropdown()</script>
+{#<script src="{{ asset('js/bootstrap.min.js') }}"></script>#}
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+{% endblock %}
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script>
+    $('.dropdown-toggle').dropdown();
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+    $(document).ready(function(){
+        $('.collapsible').collapsible({
+            accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        });
+    });
+</script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

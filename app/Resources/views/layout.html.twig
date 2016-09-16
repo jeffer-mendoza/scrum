@@ -1,21 +1,46 @@
 {% extends 'base.html.twig' %}
+    {% block body %}
+        <div class="row">
+            <div class="col s10"><h3>{% block panel_title %}{% endblock %}</h3></div>
+            <div class="col s2">{% block panel_actions %}{% endblock %}</div>
+            <div class="col s12">
+                {% block panel_body %}
 
-{% block body %}
+                    {% block table %}
+                        <table class="bordered striped">
+                            <thead>
+                            <tr>
+                                {% block th %}
+                                {% endblock %}
+                                <th width="200"><i class="fa fa-cog"></i></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% block td %}
+                            {% endblock %}
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3 class="panel-title">{% block panel_title %}{% endblock %}</h3>
-                </div>
-                <div class="col-lg-4">
-                    {% block panel_actions %}{% endblock %}
-                </div>
+                            </tbody>
+                        </table>
+                    {% endblock %}
+
+                {% endblock %}
             </div>
         </div>
-        <div class="panel-body">
-            {% block panel_body %}{% endblock %}
-        </div>
-    </div>
+        {% block footer_panel %}
 
-{% endblock %}
+
+        {% endblock %}
+    {% endblock %}
+
+
+{#{% block panel_title %}{% endblock %}#}
+{#{% block panel_actions %}{% endblock %}#}
+{#{% block panel_body %}#}
+    {#{% block table %}#}
+        {#{% block th %}#}
+        {#{% endblock %}#}
+
+        {#{% block td %}#}
+        {#{% endblock %}#}
+    {#{% endblock %}#}
+{#{% endblock %}#}

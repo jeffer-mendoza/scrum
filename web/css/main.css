@@ -1,13 +1,15 @@
 body{
-    background-color: #3a3f40;
+    /*background-color: #3a3f40;*/
     /*color: white;*/
 }
-
+nav{
+    background-color: rgba(235,30,0,1) !important;
+}
 #left{
     float:left;
     width: 13%;
     background-color: #333;
-    height: 100vh;
+    height: 80vh;
 }
 #rigth{
     padding-left: 10px;
@@ -21,3 +23,10 @@ body{
     /*margin-top: 80vh;*/
 }
 
+.btn{
+    padding: 0 0.5rem !important;
+}
+
+.btn i{
+    font-size: 1.0em !important;
+}

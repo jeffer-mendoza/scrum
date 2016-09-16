@@ -129,4 +129,11 @@ class Rol
     {
         return $this->project;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

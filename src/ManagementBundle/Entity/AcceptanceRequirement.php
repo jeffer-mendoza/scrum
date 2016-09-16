@@ -31,9 +31,9 @@ class AcceptanceRequirement
     /**
      * @var bool
      *
-     * @ORM\Column(name="acceptance", type="boolean")
+     * @ORM\Column(name="acceptance", type="boolean", nullable=true)
      */
-    private $acceptance;
+    private $acceptance = false;
 
     /**
      * @var \ManagementBundle\Entity\Story
@@ -98,6 +98,20 @@ class AcceptanceRequirement
     public function getAcceptance()
     {
         return $this->acceptance;
+    }
+
+    /**
+     * Get acceptance like stirng
+     *
+     * @return string
+     */
+    public function strAcceptance()
+    {
+        if($this->acceptance){
+            return "ACEPTADO";
+        }else{
+            return "NO ACEPTADO";
+        }
     }
 
     /**

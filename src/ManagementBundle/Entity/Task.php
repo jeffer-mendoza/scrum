@@ -31,9 +31,9 @@ class Task
     /**
      * @var bool
      *
-     * @ORM\Column(name="status", type="boolean")
+     * @ORM\Column(name="status", type="boolean", nullable=true)
      */
-    private $status;
+    private $status = false;
 
     /**
      * @var \ManagementBundle\Entity\Story

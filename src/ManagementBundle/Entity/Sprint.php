@@ -159,4 +159,29 @@ class Sprint
     {
         return $this->project;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getStories()
+    {
+        return $this->stories;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $stories
+     */
+    public function setStories($stories)
+    {
+        $this->stories = $stories;
+    }
+
+
+
+    function __toString()
+    {
+       return $this->name;
+    }
+
+
 }

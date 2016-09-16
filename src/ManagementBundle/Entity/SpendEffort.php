@@ -24,9 +24,9 @@ class SpendEffort
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_date", type="datetime")
+     * @ORM\Column(name="date", type="datetime")
      */
-    private $startDate;
+    private $date;
 
     /**
      * @var int
@@ -57,12 +57,12 @@ class SpendEffort
     /**
      * Set startDate
      *
-     * @param \DateTime $startDate
+     * @param \DateTime $date
      * @return SpendEffort
      */
-    public function setStartDate($startDate)
+    public function setDate($date)
     {
-        $this->startDate = $startDate;
+        $this->date = $date;
 
         return $this;
     }
@@ -72,9 +72,9 @@ class SpendEffort
      *
      * @return \DateTime 
      */
-    public function getStartDate()
+    public function getDate()
     {
-        return $this->startDate;
+        return $this->date;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace ManagementBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ManagementBundle\ManagementBundle;
 
 /**
  * Story
@@ -13,6 +14,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Story
 {
+    //PRIORITY
+    CONST HIGH = 5;
+    CONST MIDDLE = 3;
+    CONST LOW = 1;
+
+    //STATUS
+    CONST NONE = 0;
+    CONST TODO = 1;
+    CONST INPROGRESS = 2;
+    CONST DONE = 3;
+    CONST ACCEPT = 4;
+
+
     /**
      * @var int
      *
@@ -21,6 +35,13 @@ class Story
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100, nullable=true)
+     */
+    private $title;
 
     /**
      * @var string
@@ -114,40 +135,57 @@ class Story
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Task", mappedBy="story")
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Task", mappedBy="story",cascade={"persist"})
      */
-    private $task;
+    private $tasks;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Comment", mappedBy="story")
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Comment", mappedBy="story",cascade={"persist"})
      */
     private $comments;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\SpendEffort", mappedBy="story")
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\SpendEffort", mappedBy="story",cascade={"persist"})
      */
     private $spendEfforts;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\AcceptanceRequirement", mappedBy="story")
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\AcceptanceRequirement", mappedBy="story",cascade={"persist"})
      */
     private $acceptanceRequirements;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
 
     /**
      * Set want
@@ -165,7 +203,7 @@ class Story
     /**
      * Get want
      *
-     * @return string 
+     * @return string
      */
     public function getWant()
     {
@@ -188,7 +226,7 @@ class Story
     /**
      * Get soThat
      *
-     * @return string 
+     * @return string
      */
     public function getSoThat()
     {
@@ -211,11 +249,32 @@ class Story
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * get priority like a string
+     * @return string
+     */
+    public function strPriority()
+    {
+        if ($this->priority = Story::HIGH) {
+            return "ALTO";
+        } else {
+            if ($this->priority = Story::MIDDLE) {
+                return "MEDIA";
+            } else {
+                if ($this->priority = Story::LOW) {
+                    return "BAJA";
+                } else {
+                    return "SIN PRIORIDAD";
+                }
+            }
+        }
     }
 
     /**
@@ -234,11 +293,36 @@ class Story
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * get priority like a string
+     * @return string
+     */
+    public function strStatus()
+    {
+        if ($this->priority = Story::TODO) {
+            return "PENDIENTE";
+        } else {
+            if ($this->priority = Story::INPROGRESS) {
+                return "PROCESO";
+            } else {
+                if ($this->priority = Story::DONE) {
+                    return "LISTA";
+                } else {
+                    if ($this->priority = Story::ACCEPT) {
+                        return "APROBADA";
+                    } else {
+                        return "None";
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -257,7 +341,7 @@ class Story
     /**
      * Get effort
      *
-     * @return integer 
+     * @return integer
      */
     public function getEffort()
     {
@@ -280,7 +364,7 @@ class Story
     /**
      * Get startDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStartDate()
     {
@@ -303,7 +387,7 @@ class Story
     /**
      * Get dueDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDueDate()
     {
@@ -313,7 +397,7 @@ class Story
     /**
      * Set sprint
      *
-     * @param \stdClass $sprint
+     * @param \ManagementBundle\Entity\Sprint $sprint
      * @return Story
      */
     public function setSprint($sprint)
@@ -326,7 +410,7 @@ class Story
     /**
      * Get sprint
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Sprint
      */
     public function getSprint()
     {
@@ -336,7 +420,7 @@ class Story
     /**
      * Set activity
      *
-     * @param \stdClass $activity
+     * @param \ManagementBundle\Entity\Activity $activity
      * @return Story
      */
     public function setActivity($activity)
@@ -349,7 +433,7 @@ class Story
     /**
      * Get activity
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Activity
      */
     public function getActivity()
     {
@@ -359,7 +443,7 @@ class Story
     /**
      * Set project
      *
-     * @param \stdClass $project
+     * @param \ManagementBundle\Entity\Project $project
      * @return Story
      */
     public function setProject($project)
@@ -372,7 +456,7 @@ class Story
     /**
      * Get project
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Project
      */
     public function getProject()
     {
@@ -382,7 +466,7 @@ class Story
     /**
      * Set parentStory
      *
-     * @param \stdClass $parentStory
+     * @param Story $parentStory
      * @return Story
      */
     public function setParentStory($parentStory)
@@ -395,7 +479,7 @@ class Story
     /**
      * Get parentStory
      *
-     * @return \stdClass 
+     * @return Story
      */
     public function getParentStory()
     {
@@ -405,7 +489,7 @@ class Story
     /**
      * Set rol
      *
-     * @param \stdClass $rol
+     * @param \ManagementBundle\Entity\Rol $rol
      * @return Story
      */
     public function setRol($rol)
@@ -418,7 +502,7 @@ class Story
     /**
      * Get rol
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Rol
      */
     public function getRol()
     {
@@ -429,4 +513,115 @@ class Story
     {
         return $this->want;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * @param ArrayCollection $tasks
+     */
+    public function setTasks($tasks)
+    {
+        $this->tasks = $tasks;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSpendEfforts()
+    {
+        return $this->spendEfforts;
+    }
+
+    /**
+     * @param ArrayCollection $spendEfforts
+     */
+    public function setSpendEfforts($spendEfforts)
+    {
+        $this->spendEfforts = $spendEfforts;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAcceptanceRequirements()
+    {
+        return $this->acceptanceRequirements;
+    }
+
+    /**
+     * @param ArrayCollection $acceptanceRequirements
+     */
+    public function setAcceptanceRequirements($acceptanceRequirements)
+    {
+        $this->acceptanceRequirements = $acceptanceRequirements;
+    }
+
+    /**
+     * add an Acceptance Requirement
+     * @param AcceptanceRequirement $acceptanceRequirement
+     * @return $this
+     */
+    public function addAcceptanceRequirement(AcceptanceRequirement $acceptanceRequirement){
+        $this->acceptanceRequirements[] = $acceptanceRequirement;
+
+        return $this;
+    }
+
+    /**
+     * add a task
+     * @param Task $task
+     * @return $this
+     */
+    public function addTask(Task $task){
+        $this->tasks[] = $task;
+
+        return $this;
+    }
+
+    /**
+     * add a spend effort
+     * @param SpendEffort $spendEffort
+     * @return $this
+     */
+    public function addspendEffort(SpendEffort $spendEffort){
+        $this->spendEfforts[] = $spendEffort;
+
+        return $this;
+    }
+
+    /**
+     * add a spend effort
+     * @param Comment $comment
+     * @return $this
+     */
+    public function addComment(Comment $comment){
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+
+
 }

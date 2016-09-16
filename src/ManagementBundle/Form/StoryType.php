@@ -5,6 +5,8 @@ namespace ManagementBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 class StoryType extends AbstractType
 {
@@ -15,18 +17,19 @@ class StoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title')
+            ->add('rol')
             ->add('want')
             ->add('soThat')
             ->add('priority')
             ->add('status')
             ->add('effort')
-            ->add('startDate', 'datetime')
-            ->add('dueDate', 'datetime')
+            ->add('startDate', DateType::class,array('widget'=>'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'')))
+            ->add('dueDate', DateType::class,array('widget'=>'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'')))
             ->add('sprint')
             ->add('activity')
             ->add('project')
             ->add('parentStory')
-            ->add('rol')
         ;
     }
     

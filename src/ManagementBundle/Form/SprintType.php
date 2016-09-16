@@ -3,8 +3,10 @@
 namespace ManagementBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class SprintType extends AbstractType
 {
@@ -16,8 +18,8 @@ class SprintType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('startDate', 'datetime')
-            ->add('dueDate', 'datetime')
+            ->add('startDate', DateType::class,array('widget'=>'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'')))
+            ->add('dueDate', DateType::class,array('widget'=>'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'')))
             ->add('project')
         ;
     }

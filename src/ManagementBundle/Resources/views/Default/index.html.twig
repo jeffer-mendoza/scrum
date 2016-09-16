@@ -1,1 +1,53 @@
-Hello World!
+{% extends 'layout.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col s3">
+            <h3>TO DO</h3>
+            {% for story in stories_todo %}
+                <div class="row">
+                    <div class="col s12 m5">
+                        <div class="card-panel teal">
+                            <span class="white-text">{{ story.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col s3">
+            <h3>IN PROGRESS</h3>
+            {% for story in stories_inprogress %}
+                <div class="row">
+                    <div class="col s12 m5">
+                        <div class="card-panel teal">
+                            <span class="white-text">{{ story.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col s3">
+            <h3>DONE</h3>
+            {% for story in stories_done %}
+                <div class="row">
+                    <div class="col s12 m5">
+                        <div class="card-panel teal">
+                            <span class="white-text">{{ story.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col s3">
+            <h3>ACCEPT</h3>
+            {% for story in stories_accept %}
+                <div class="row">
+                    <div class="col s12 m5">
+                        <div class="card-panel teal">
+                            <span class="white-text">{{ story.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

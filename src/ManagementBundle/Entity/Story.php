@@ -39,56 +39,56 @@ class Story
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100, nullable=true)
+     * @ORM\Column(name="title", type="string", length=100, nullable=false)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="want", type="string", length=255)
+     * @ORM\Column(name="want", type="string", length=255, nullable=false)
      */
     private $want;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="soThat", type="string", length=255)
+     * @ORM\Column(name="soThat", type="string", length=255, nullable=false)
      */
     private $soThat;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="priority", type="smallint")
+     * @ORM\Column(name="priority", type="smallint", nullable=true)
      */
     private $priority;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="smallint")
+     * @ORM\Column(name="status", type="smallint", nullable=true)
      */
     private $status;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="effort", type="smallint")
+     * @ORM\Column(name="effort", type="smallint", nullable=true)
      */
     private $effort;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_date", type="datetime")
+     * @ORM\Column(name="start_date", type="datetime", nullable=true)
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="due_date", type="datetime")
+     * @ORM\Column(name="due_date", type="datetime", nullable=true)
      */
     private $dueDate;
 
@@ -263,7 +263,7 @@ class Story
     public function strPriority()
     {
         if ($this->priority = Story::HIGH) {
-            return "ALTO";
+            return "ALTA";
         } else {
             if ($this->priority = Story::MIDDLE) {
                 return "MEDIA";
@@ -313,10 +313,10 @@ class Story
                 return "PROCESO";
             } else {
                 if ($this->priority = Story::DONE) {
-                    return "LISTA";
+                    return "REALIZADA";
                 } else {
                     if ($this->priority = Story::ACCEPT) {
-                        return "APROBADA";
+                        return "ACEPTADA";
                     } else {
                         return "None";
                     }

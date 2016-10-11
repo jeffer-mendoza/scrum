@@ -41,7 +41,10 @@ class StoryController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('ManagementBundle:Project')->find(1);
         $story = new Story();
+        $story->setProject($project);
         $form = $this->createForm('ManagementBundle\Form\StoryType', $story);
         $form->handleRequest($request);
 

@@ -8,57 +8,58 @@
 </head>
 <body>
 {% block content %}
-<nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo right">SCRUM</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li class="active"><a href="{{ path('story_index') }}">Backlogs</a></li>
-            <li><a href="{{ path('sprint_index') }}">Sprint</a></li>
-            <li><a href="{{ path('rol_index') }}">Role</a></li>
-            <li><a href="{{ path('management_homepage') }}">Board</a></li>
-            <li><a href="{{ path('report_index') }}">Report</a></li>
-        </ul>
-    </div>
-</nav>
-<div class="row">
-    <div class="col s2">
-        <ul class="collection">
-            {{ render(controller('ManagementBundle:Sprint:sprints')) }}
-        </ul>
-    </div>
-    <div class="col s10">
-        {% block body %}
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo right">SCRUM</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li class="active"><a href="{{ path('story_index') }}">Backlogs</a></li>
+                <li><a href="{{ path('sprint_index') }}">Sprint</a></li>
+                <li><a href="{{ path('rol_index') }}">Role</a></li>
+                <li><a href="{{ path('management_homepage') }}">Board</a></li>
+                <li><a href="{{ path('report_index') }}">Report</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s2">
+            <div class="card sticky-action text-center">
+                <h3>Sprints</h3>
+                {{ render(controller('ManagementBundle:Sprint:sprints')) }}
+            </div>
+        </div>
+        <div class="col s10">
+            {% block body %}
 
-        {% endblock %}
+            {% endblock %}
+        </div>
     </div>
-</div>
 {% endblock content %}
 
 {#<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>#}
 {% block stylesheet %}
-<link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-      integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
-      crossorigin="anonymous">
-<script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
-{#<script src="{{ asset('js/bootstrap.min.js') }}"></script>#}
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
+          crossorigin="anonymous">
+    <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
+    {#<script src="{{ asset('js/bootstrap.min.js') }}"></script>#}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 {% endblock %}
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 <script>
     $('.dropdown-toggle').dropdown();
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('select').material_select();
     });
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15 // Creates a dropdown of 15 years to control year
     });
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.collapsible').collapsible({
-            accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+            accordion: true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
         });
     });
 </script>

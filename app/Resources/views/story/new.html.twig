@@ -2,8 +2,7 @@
 
 {% block panel_title %}Story Creation{% endblock %}
 {% block panel_actions %}
- <a class="waves-effect waves-light btn" href="{{ path('story_index') }}"><i class="fa fa-arrow-left"
-                                                                                aria-hidden="true"></i></a>
+ <a class="btn" href="{{ path('story_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 {% endblock %}
 {% block panel_body %}
     {{ form_start(form) }}

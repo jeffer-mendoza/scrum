@@ -10,9 +10,12 @@
     {{ story.id }} - {{ story.title }}
 {%  endblock %}
 {% block panel_body %}
+    <br>
     {{ form_start(delete_form) }}
     <input class="waves-effect waves-light btn" type="submit" value="Delete">
     {{ form_end(delete_form) }}
+    <br>
+
     <table class="table bordered">
 
         <tr>
@@ -41,10 +44,10 @@
     </table>
 {% endblock %}
 
-{% block footer_panel %}
+{% block footer %}
     <ul class="collapsible" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header"><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
+            <div class="collapsible-header" ><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
             <div class="collapsible-body">
                 <table id="acceptance" class="bordered striped">
                     <tbody>

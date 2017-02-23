@@ -1,9 +1,9 @@
-body{
+body {
     background-color: #1C1C1C;
     color: white !important;
 }
 
-#menu{
+#menu {
     color: teal !important;
     background-color: #2E2E2E;
     padding: 0px;
@@ -11,52 +11,53 @@ body{
     height: 100vh;
 }
 
-#menu li:hover{
+#menu li:hover {
     background-color: #1C1C1C !important;
 }
 
-#menu li{
-   padding: 10px 10px 10px 20px;
+#menu li {
+    padding: 10px 10px 10px 20px;
 
 }
 
-#menu ul{
-   margin: 0px 0px 0px 0px;
+#menu ul {
+    margin: 0px 0px 0px 0px;
     padding: 0px;
 }
 
-#menu a{
-    color:teal !important;
+#menu a {
+    color: teal !important;
 }
 
-#left{
-    float:left;
+#left {
+    float: left;
     width: 13%;
     background-color: #333;
     height: 80vh;
 }
-#rigth{
+
+#rigth {
     padding-left: 10px;
-    float:left;
+    float: left;
     width: 86%;
-    min-height:80vh;
+    min-height: 80vh;
     background-color: #fff;
 }
-#footer{
-    clear:both;
+
+#footer {
+    clear: both;
     /*margin-top: 80vh;*/
 }
 
-.btn{
+.btn {
     padding: 0rem 0.5rem !important;
     margin-top: 0px;
     text-transform: capitalize;
 }
 
-.btn i{
+.btn i {
     font-size: 1.0em !important;
 }
-
 
 .boton {
     display: inline-block;
@@ -186,6 +187,10 @@ fieldset[disabled] .boton-default.focus {
     background-color: #333;
 }
 
-table{
+table {
     color: white !important;
+}
+
+.collapsible-header {
+    background-color: #2E2E2E !important;
 }

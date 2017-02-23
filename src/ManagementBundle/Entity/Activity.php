@@ -28,14 +28,6 @@ class Activity
      */
     private $name;
 
-    /**
-     * @var \ManagementBundle\Entity\BusinessProcesses
-     *
-     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\BusinessProcesses", inversedBy="activities")
-     * @ORM\JoinColumn(name="business_processes", referencedColumnName="id")
-     */
-    private $businessProcesses;
-
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -77,26 +69,10 @@ class Activity
         return $this->name;
     }
 
-    /**
-     * Set businessProcesses
-     *
-     * @param \stdClass $businessProcesses
-     * @return Activity
-     */
-    public function setBusinessProcesses($businessProcesses)
+    function __toString()
     {
-        $this->businessProcesses = $businessProcesses;
-
-        return $this;
+        return $this->name.'';
     }
 
-    /**
-     * Get businessProcesses
-     *
-     * @return \stdClass 
-     */
-    public function getBusinessProcesses()
-    {
-        return $this->businessProcesses;
-    }
+
 }

@@ -45,7 +45,7 @@ class StoryController extends Controller
         $project = $em->getRepository('ManagementBundle:Project')->find(1);
         $story = new Story();
         $story->setProject($project);
-        $form = $this->createForm('ManagementBundle\Form\StoryType', $story);
+        $form = $this->createForm('ManagementBundle\Form\CreateStoryType', $story);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

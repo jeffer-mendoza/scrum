@@ -1,28 +1,22 @@
 {% extends 'layout.html.twig' %}
 
 {% block panel_title %}
-    <h1>  {{ sprint.id }} -> {{ sprint.name }} </h1>
-    <p> Fecha Inicio: {% if sprint.startDate %}{{ sprint.startDate|date('d \\d\\e M \\d\\e Y') }}{% endif %} <br/>
-        Fecha Fin: {% if sprint.dueDate %}{{ sprint.dueDate|date('d \\d\\e M \\d\\e Y') }}{% endif %}
-    </p>
+    {{ sprint.id }} - {{ sprint.name }}
+    <h6> Fecha Inicio: {% if sprint.startDate %}{{ sprint.startDate|date('d \\d\\e M \\d\\e Y') }}{% endif %}
+        al {% if sprint.dueDate %}{{ sprint.dueDate|date('d \\d\\e M \\d\\e Y') }}{% endif %}
+    </h6>
 {% endblock %}
 
 {% block panel_actions %}
-    <a class="waves-effect waves-light btn" href="{{ path('sprint_index') }}"><i class="fa fa-arrow-left"
-                                                                                 aria-hidden="true"></i> </a>
-    <a class="waves-effect waves-light btn" href="{{ path('sprint_edit', { 'id': sprint.id }) }}">Edit</a>
-    {{ form_start(delete_form) }}
-    <input class="waves-effect waves-light btn" type="submit" value="Delete">
-    {{ form_end(delete_form) }}
+    <a class="boton boton-default" href="{{ path('sprint_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+    <a class="boton boton-default" href="{{ path('sprint_edit', { 'id': sprint.id }) }}">Edit</a>
 {% endblock %}
 
  {% block th %}
      <th>Title</th>
      <th>Priority</th>
      <th>Status</th>
-     <th>Effort</th>
-     <th>Startdate</th>
-     <th>Duedate</th>
+     <th>Points</th>
  {% endblock %}
 
     {% block td %}
@@ -42,4 +36,7 @@
                 </td>
             </tr>
         {% endfor %}
+        {{ form_start(delete_form) }}
+        <input class="boton boton-default" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
     {% endblock %}

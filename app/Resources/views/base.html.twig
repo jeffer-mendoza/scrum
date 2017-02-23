@@ -6,26 +6,28 @@
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
+<div class="teal-text">
+    Scrum Management
+</div>
 <body>
 {% block content %}
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo right">SCRUM</a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li class="active"><a href="{{ path('story_index') }}">Backlogs</a></li>
+    <div class="row">
+        <div id="menu" class="col s2">
+            <ul>
+                <li><a href="{{ path('story_index') }}">Backlogs</a></li>
                 <li><a href="{{ path('sprint_index') }}">Sprint</a></li>
                 <li><a href="{{ path('rol_index') }}">Role</a></li>
                 <li><a href="{{ path('management_homepage') }}">Board</a></li>
                 <li><a href="{{ path('report_index') }}">Report</a></li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Dropdown <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {{ render(controller('ManagementBundle:Sprint:sprints')) }}
+                    </ul>
+                </li>
             </ul>
-        </div>
-    </nav>
-    <div class="row">
-        <div class="col s2">
-            <div class="card sticky-action text-center">
-                <h3>Sprints</h3>
-                {{ render(controller('ManagementBundle:Sprint:sprints')) }}
-            </div>
         </div>
         <div class="col s10">
             {% block body %}
@@ -35,20 +37,20 @@
     </div>
 {% endblock content %}
 
-{#<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>#}
 {% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1"
-          crossorigin="anonymous">
+
     <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
-    {#<script src="{{ asset('js/bootstrap.min.js') }}"></script>#}
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/materialize.min.js') }}"></script>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 {% endblock %}
 <!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 <script>
+    $('.dropdown-toggle').dropdown();
+
     $('.dropdown-toggle').dropdown();
     $(document).ready(function () {
         $('select').material_select();

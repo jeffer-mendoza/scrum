@@ -2,27 +2,25 @@
 
 {% block panel_title %}Backlogs{% endblock %}
 {% block panel_actions %}
-    <a class="btn btn-default" href="{{ path('story_new') }}">Create a new entry</a>
+    <a class="boton boton-default" href="{{ path('story_new') }}">Story new</a>
 {% endblock %}
 
     {% block th %}
+        <th>id</th>
         <th>Title</th>
         <th>Priority</th>
         <th>Status</th>
-        <th>Effort</th>
-        <th>Startdate</th>
-        <th>Duedate</th>
+        <th>Points</th>
     {% endblock %}
 
     {% block td %}
         {% for story in stories %}
-            <tr>
+            <tr class="" title="{{story.want}}"   >
+                <td>{{ story.id }}</td>
                 <td>{{ story.title }}</td>
-                <td>{{ story.priority }}</td>
-                <td>{{ story.status }}</td>
+                <td>{{ story.strpriority }}</td>
+                <td>{{ story.strstatus }}</td>
                 <td>{{ story.effort }}</td>
-                <td>{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i') }}{% endif %}</td>
-                <td>{% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i') }}{% endif %}</td>
                 <td>
                     <a class="waves-effect waves-light btn" href="{{ path('story_show', { 'id': story.id }) }}"><i
                                 class="fa fa-eye"></i></a>

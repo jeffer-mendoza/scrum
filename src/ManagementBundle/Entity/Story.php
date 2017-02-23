@@ -262,13 +262,13 @@ class Story
      */
     public function strPriority()
     {
-        if ($this->priority = Story::HIGH) {
+        if ($this->priority == Story::HIGH) {
             return "ALTA";
         } else {
-            if ($this->priority = Story::MIDDLE) {
+            if ($this->priority == Story::MIDDLE) {
                 return "MEDIA";
             } else {
-                if ($this->priority = Story::LOW) {
+                if ($this->priority == Story::LOW) {
                     return "BAJA";
                 } else {
                     return "SIN PRIORIDAD";
@@ -306,19 +306,19 @@ class Story
      */
     public function strStatus()
     {
-        if ($this->priority = Story::TODO) {
+        if ($this->status == Story::TODO) {
             return "PENDIENTE";
         } else {
-            if ($this->priority = Story::INPROGRESS) {
-                return "PROCESO";
+            if ($this->status == Story::INPROGRESS) {
+                return "EN PROCESO";
             } else {
-                if ($this->priority = Story::DONE) {
+                if ($this->status == Story::DONE) {
                     return "REALIZADA";
                 } else {
-                    if ($this->priority = Story::ACCEPT) {
+                    if ($this->status == Story::ACCEPT) {
                         return "ACEPTADA";
                     } else {
-                        return "None";
+                        return "NONE";
                     }
                 }
             }

@@ -2,9 +2,9 @@
 
 {% block panel_title %}
     <h1>  {{ sprint.id }} -> {{ sprint.name }} </h1>
-    <h5> {% if sprint.startDate %}{{ sprint.startDate|date('d-M-Y H:i') }}{% endif %} al
-        {% if sprint.dueDate %}{{ sprint.dueDate|date('d-M-Y H:i') }}{% endif %}
-    </h5>
+    <p> Fecha Inicio: {% if sprint.startDate %}{{ sprint.startDate|date('d \\d\\e M \\d\\e Y') }}{% endif %} <br/>
+        Fecha Fin: {% if sprint.dueDate %}{{ sprint.dueDate|date('d \\d\\e M \\d\\e Y') }}{% endif %}
+    </p>
 {% endblock %}
 
 {% block panel_actions %}

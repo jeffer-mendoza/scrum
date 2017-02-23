@@ -1,46 +1,45 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
-        <div class="row">
-            <div class="col s10"><h3>{% block panel_title %}{% endblock %}</h3></div>
-            <div class="col s2">{% block panel_actions %}{% endblock %}</div>
-            <div class="col s12">
-                {% block panel_body %}
 
-                    {% block table %}
-                        <table class="bordered striped">
-                            <thead>
-                            <tr>
-                                {% block th %}
-                                {% endblock %}
-                                <th width="200"><i class="fa fa-cog"></i></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% block td %}
-                            {% endblock %}
-
-                            </tbody>
-                        </table>
-                    {% endblock %}
-
-                {% endblock %}
+{% block body %}
+    <div class="teal">
+        <div class="card-action white-text">
+            <div class="row">
+                <div class="col l10">
+                    <h5>
+                        {% block panel_title %}
+                        {% endblock panel_title %}
+                    </h5>
+                </div>
+                <div class="col l2">
+                    {% block panel_actions %} {% endblock %}
+                </div>
             </div>
         </div>
-        {% block footer_panel %}
+        <div class="card-content white" style="background-color: #1C1C1C !important;">
+            <div class="row">
+                {% block panel_body %}
+                    <table id="table" class="bordered table striped">
+                        <thead>
+                        <tr>
+                            {% block th %}
+                            {% endblock %}
+                            <th width="12%" rel="tooltip" data-toggle="tooltip" title="Opciones">
+                                <div class="center-align"><i class="fa fa-cog"></i></div>
+                            </th>
+                        <tr>
+                        </thead>
+                        <tbody class="searchable">
+                        {% block td %}
+                        {% endblock %}
+                        </tbody>
+                    </table>
+                    {% block footer_panel %}
 
 
-        {% endblock %}
-    {% endblock %}
+                    {% endblock %}
+                {% endblock panel_body %}
+            </div>
+        </div>
+    </div>
 
-
-{#{% block panel_title %}{% endblock %}#}
-{#{% block panel_actions %}{% endblock %}#}
-{#{% block panel_body %}#}
-    {#{% block table %}#}
-        {#{% block th %}#}
-        {#{% endblock %}#}
-
-        {#{% block td %}#}
-        {#{% endblock %}#}
-    {#{% endblock %}#}
-{#{% endblock %}#}
+{% endblock %}

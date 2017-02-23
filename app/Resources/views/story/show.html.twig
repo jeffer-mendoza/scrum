@@ -1,19 +1,23 @@
 {% extends 'layout.html.twig' %}
 
 {% block panel_actions %}
-    <a class="btn" href="{{ path('story_index') }}"><i class="fa fa-arrow-left"
-                                                       aria-hidden="true"></i> </a>
+    <a class="boton boton-default" href="{{ path('story_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+    <a class="boton boton-default" href="{{ path('report_story_pdf', {'id': story.id}) }}"><i class="fa fa-file-pdf-o"></i> </a>
+    <a class="boton boton-default" href="{{ path('story_edit', { 'id': story.id }) }}">Edit</a>
 
-    <a class="btn" href="{{ path('report_story_pdf', {'id': story.id}) }}"><i class="fa fa-file-pdf-o"></i> </a>
-    <a class="btn" href="{{ path('story_edit', { 'id': story.id }) }}">Edit</a>
+{% endblock %}
+{% block panel_title %}
+    {{ story.id }} - {{ story.title }}
+{%  endblock %}
+{% block panel_body %}
     {{ form_start(delete_form) }}
     <input class="waves-effect waves-light btn" type="submit" value="Delete">
     {{ form_end(delete_form) }}
-{% endblock %}
-{% block panel_body %}
-    <table class="bordered striped">
+    <table class="table bordered">
+
         <tr>
-            <td colspan="6"><h1>{{ story.id }} - {{ story.title }}</h1></td>
+            <th>Want</th>
+            <td colspan="5">{{ story.fullDescription }}</td>
         </tr>
         <tr>
             <th>Priority</th>
@@ -23,20 +27,17 @@
             <th>Status</th>
             <td>{{ story.strstatus }}</td>
         </tr>
-        <tr>
-            <th>Start Date</th>
-            <td>{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>
-            <th>Due Date</th>
-            <td colspan="4"> {% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i:s') }}{% endif %}</td>
-        </tr>
+        {#<tr>#}
+            {#<th>Start Date</th>#}
+            {#<td>{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>#}
+            {#<th>Due Date</th>#}
+            {#<td colspan="4"> {% if story.dueDate %}{{ story.dueDate|date('d-M-Y H:i:s') }}{% endif %}</td>#}
+        {#</tr>#}
         <tr>
             <th>Sprint</th>
             <td colspan="5">{{ story.sprint }}</td>
         </tr>
-        <tr>
-            <th>Want</th>
-            <td colspan="5">{{ story.want }}</td>
-        </tr>
+
     </table>
 {% endblock %}
 

@@ -20,8 +20,8 @@ class CreateStoryType extends AbstractType
         $builder
             ->add('title')
             ->add('rol')
-            ->add('want')
-            ->add('soThat')
+            ->add('want',null, array('attr'=>array('value'=>'Deseo ')))
+            ->add('soThat',null, array('attr'=>array('value'=>'para ')))
             ->add('priority', ChoiceType::class, array(
                 'choices' => array(
                     '1' => 'BAJA',

@@ -414,6 +414,9 @@ class Story
      */
     public function getSprint()
     {
+        if($this->sprint == null){
+            return 'No asignado';
+        }
         return $this->sprint;
     }
 
@@ -620,6 +623,13 @@ class Story
         $this->comments[] = $comment;
 
         return $this;
+    }
+
+    /**
+     * full description de la user story
+     */
+    public function fullDescription(){
+        return 'Como '.$this->rol.', '.$this->want.' '.$this->soThat;
     }
 
 

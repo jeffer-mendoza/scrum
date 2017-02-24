@@ -32,6 +32,91 @@ class ReportController extends Controller
     /**
      * Generate user story in pdf format
      *
+     * @Route("/story-list/pdf", name="report_story_list_pdf")
+     * @Method("GET")
+     * @return Response
+     */
+    public function storyListPdfAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $stories = $em->getRepository('ManagementBundle:Story')->findAll();
+
+        $html = $this->renderView('report/product-backlog.html.twig', array( 'stories' => $stories
+        ));
+        $nameFile = "GD-Stories-list.pdf";
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
+            )
+        );
+
+        return $this->render('report/pdf.html.twig', array('story' => $story));
+
+    }
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/product-backlog/pdf", name="report_product_backlog_pdf")
+     * @Method("GET")
+     * @return Response
+     */
+    public function productBacklogPdfAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $stories = $em->getRepository('ManagementBundle:Story')->findAll();
+
+        $html = $this->renderView('report/product-backlog.html.twig', array( 'stories' => $stories
+        ));
+        $nameFile = "GD-product-backlog.pdf";
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
+            )
+        );
+
+    }
+
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/product-backlog/image", name="report_product_backlog_image")
+     * @Method("GET")
+     * @return Response
+     */
+    public function productBacklogImageAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $stories = $em->getRepository('ManagementBundle:Story')->findAll();
+
+        $html = $this->renderView('report/product-backlog-image.html.twig', array( 'stories' => $stories
+        ));
+        $nameFile = "GD-product-backlog.jpg";
+
+        return new Response(
+            $this->get('knp_snappy.image')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'image/jpg',
+                'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
+            )
+        );
+
+    }
+
+    /**
+     * Generate user story in pdf format
+     *
      * @Route("/story/{id}/pdf", name="report_story_pdf")
      * @Method("GET")
      * @return Response

@@ -55,6 +55,16 @@ class CreateStoryType extends AbstractType
                     '377' => '377',
                 )
             ))
+            ->add('effort', ChoiceType::class, array(
+                'choices' => array(
+                    '0' => '0h',
+                    '1' => '1h',
+                    '2' => '2h',
+                    '4' => '4h',
+                    '8' => '8h',
+                    '16' => '16h',
+                )
+            ))
             ->add('module')
             ->add('sprint');
 

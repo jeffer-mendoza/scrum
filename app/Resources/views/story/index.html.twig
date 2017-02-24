@@ -3,14 +3,18 @@
 {% block panel_title %}Backlogs{% endblock %}
 {% block panel_actions %}
     <a class="boton boton-default" href="{{ path('story_new') }}">Story new</a>
+    <a class="boton boton-default" href="{{ path('report_story_list_pdf')}}"><i class="fa fa-book"></i> </a>
+    <a class="boton boton-default" href="{{ path('report_product_backlog_pdf')}}"><i class="fa fa-file-pdf-o"></i> </a>
+    <a class="boton boton-default" href="{{ path('report_product_backlog_image')}}"><i class="fa fa-file-image-o"></i> </a>
 {% endblock %}
 
     {% block th %}
         <th>id</th>
         <th>Title</th>
         <th>Priority</th>
-        <th>Status</th>
         <th>Points</th>
+        <th>Status</th>
+        <th>Effort</th>
     {% endblock %}
 
     {% block td %}
@@ -19,6 +23,7 @@
                 <td>{{ story.id }}</td>
                 <td>{{ story.title }}</td>
                 <td>{{ story.strpriority }}</td>
+                <td>{{ story.points }}</td>
                 <td>{{ story.strstatus }}</td>
                 <td>{{ story.effort }}</td>
                 <td>

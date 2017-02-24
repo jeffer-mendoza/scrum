@@ -95,10 +95,10 @@ class StoryController extends Controller
             $em->persist($story);
             $em->flush();
 
-            return $this->redirectToRoute('story_edit', array('id' => $story->getId()));
+            return $this->redirectToRoute('story_show', array('id' => $story->getId()));
         }
 
-        return $this->render('story/show.html.twig', array(
+        return $this->render('story/edit.html.twig', array(
             'story' => $story,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

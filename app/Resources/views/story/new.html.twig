@@ -28,7 +28,15 @@
         {{ form_row(form.status) }}
     </div>
 
-    {{ form_rest(form) }}
+    <div class="col l4">
+        {{ form_row(form.sprint) }}
+    </div>
+    <div class="col l4">
+        {{ form_row(form.module) }}
+    </div>
+    <div class="col l4">
+        {{ form_row(form.effort) }}
+    </div>
     <input class="waves-effect waves-light btn" type="submit" value="Create"/>
     {{ form_end(form) }}
 {% endblock %}

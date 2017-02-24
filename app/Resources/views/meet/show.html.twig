@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block panel_title %}{{ meet.id }}{% endblock %}
+
+{% block panel_actions %}
+    <a class="boton boton-default" href="{{ path('meet_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </a>
+    <a class="boton boton-default" href="{{ path('meet_edit', { 'id': meet.id }) }}">Edit</a>
+{% endblock %}
+
+ {% block panel_body %}
+     <table>
+         <tr>
+             <th>Id</th>
+             <td>{{ meet.id }}</td>
+         </tr>
+         <tr>
+             <th>Detail</th>
+             <td>{{ meet.detail }}</td>
+         </tr>
+         <tr>
+             <th>Decisions</th>
+             <td>{{ meet.decisions }}</td>
+         </tr>
+     </table>
+
+     {{ form_start(delete_form) }}
+     <input class="boton boton-default" type="submit" value="Delete">
+     {{ form_end(delete_form) }}
+ {% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Meet edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('meet_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
+
+{% extends 'layout.html.twig' %}
+
+{% block panel_title %}Meet New{% endblock %}
+{% block panel_actions %}<a class="boton boton-default" href="{{ path('meet_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </a>{% endblock %}
+{% block panel_body %}
+    {{ form_start(form_edit) }}
+    {{ form_widget(form_edit) }}
+    <input class="waves-effect waves-light btn" type="submit" value="Create" />
+    {{ form_end(form_edit) }}
+{% endblock %}
+

@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Activity
  *
- * @ORM\Table(name="activity")
+ * @ORM\Table(name="module")
  * @ORM\Entity(repositoryClass="ManagementBundle\Repository\ActivityRepository")
  */
-class Activity
+class Module
 {
     /**
      * @var int

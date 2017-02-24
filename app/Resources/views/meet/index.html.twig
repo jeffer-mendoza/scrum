@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block panel_title %}Meet list{% endblock %}
+{% block panel_actions %}
+    <a class="boton boton-default" href="{{ path('meet_new') }}">New Meet</a>
+{% endblock %}
+
+    {% block th %}
+        <th>Id</th>
+        <th>Detail</th>
+        <th>Decisions</th>
+    {% endblock %}
+
+    {% block td %}
+        {% for meet in meets %}
+            <tr>
+                <td>{{ meet.id }}</td>
+                <td>{{ meet.detail }}</td>
+                <td>{{ meet.decisions }}</td>
+                <td>
+                    <a class="btn btn-default" href="{{ path('meet_show', { 'id': meet.id }) }}"><i  class="fa fa-eye"></i></a>
+                    <a class="btn btn-default" href="{{ path('meet_edit', { 'id': meet.id }) }}"><i  class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endblock %}
+

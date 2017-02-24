@@ -1,3 +1,15 @@
+management_meet:
+    resource: "@ManagementBundle/Controller/MeetController.php"
+    type:     annotation
+
+management_meet:
+    resource: "@ManagementBundle/Controller/MeetController.php"
+    type:     annotation
+
+management_meet:
+    resource: "@ManagementBundle/Controller/MeetController.php"
+    type:     annotation
+
 management_story_information:
     resource: "@ManagementBundle/Controller/StoryInformationController.php"
     type:     annotation

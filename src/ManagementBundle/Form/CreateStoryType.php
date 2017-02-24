@@ -20,8 +20,8 @@ class CreateStoryType extends AbstractType
         $builder
             ->add('title')
             ->add('rol')
-            ->add('want',null, array('attr'=>array('value'=>'Deseo ')))
-            ->add('soThat',null, array('attr'=>array('value'=>'para ')))
+            ->add('want', null, array('attr' => array('value' => 'deseo ')))
+            ->add('soThat', null, array('attr' => array('value' => 'para ')))
             ->add('priority', ChoiceType::class, array(
                 'choices' => array(
                     '1' => 'BAJA',
@@ -38,7 +38,7 @@ class CreateStoryType extends AbstractType
                     '4' => 'ACEPTADO',
                 )
             ))
-            ->add('effort', ChoiceType::class, array(
+            ->add('points', ChoiceType::class, array(
                 'choices' => array(
                     '0' => '1',
                     '1' => '2',
@@ -55,8 +55,9 @@ class CreateStoryType extends AbstractType
                     '377' => '377',
                 )
             ))
-            ->add('activity')
-            ->add('project');
+            ->add('module')
+            ->add('sprint');
+
     }
 
     /**

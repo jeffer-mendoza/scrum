@@ -67,6 +67,13 @@ class Story
     /**
      * @var int
      *
+     * @ORM\Column(name="points", type="smallint", nullable=true)
+     */
+    private $points;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="status", type="smallint", nullable=true)
      */
     private $status;
@@ -103,10 +110,10 @@ class Story
     /**
      * @var \ManagementBundle\Entity\Activity
      *
-     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Activity", inversedBy="stories")
-     * @ORM\JoinColumn(name="activity", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Module", inversedBy="stories")
+     * @ORM\JoinColumn(name="module", referencedColumnName="id")
      */
-    private $activity;
+    private $module;
 
     /**
      * @var \ManagementBundle\Entity\Project
@@ -421,26 +428,19 @@ class Story
     }
 
     /**
-     * Set activity
-     *
-     * @param \ManagementBundle\Entity\Activity $activity
-     * @return Story
+     * @return Activity
      */
-    public function setActivity($activity)
+    public function getModule()
     {
-        $this->activity = $activity;
-
-        return $this;
+        return $this->module;
     }
 
     /**
-     * Get activity
-     *
-     * @return \ManagementBundle\Entity\Activity
+     * @param Activity $module
      */
-    public function getActivity()
+    public function setModule($module)
     {
-        return $this->activity;
+        $this->module = $module;
     }
 
     /**
@@ -632,6 +632,20 @@ class Story
         return 'Como '.$this->rol.', '.$this->want.' '.$this->soThat;
     }
 
+    /**
+     * @return int
+     */
+    public function getPoints()
+    {
+        return $this->points;
+    }
 
+    /**
+     * @param int $points
+     */
+    public function setPoints($points)
+    {
+        $this->points = $points;
+    }
 
 }

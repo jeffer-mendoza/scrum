@@ -25,8 +25,8 @@
         <tr>
             <th>Priority</th>
             <td>{{ story.strpriority }}</td>
-            <th>Effort(hrs)</th>
-            <td>{{ story.effort }}</td>
+            <th>Points</th>
+            <td>{{ story.points }}</td>
             <th>Status</th>
             <td>{{ story.strstatus }}</td>
         </tr>
@@ -38,7 +38,11 @@
         {#</tr>#}
         <tr>
             <th>Sprint</th>
-            <td colspan="5">{{ story.sprint }}</td>
+            <td>{{ story.sprint }}</td>
+            <th>Module</th>
+            <td>{{ story.module }}</td>
+            <th>Effort(hrs)</th>
+            <td>{{ story.effort }}</td>
         </tr>
 
     </table>
@@ -49,7 +53,7 @@
         <li>
             <div class="collapsible-header" ><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
             <div class="collapsible-body">
-                <table id="acceptance" class="bordered striped">
+                <table id="acceptance" class="bordered">
                     <tbody>
                     {% for acceptance in story.acceptanceRequirements %}
                         <tr>
@@ -78,7 +82,7 @@
             <div class="collapsible-body">
                 <div class="row">
                     <div class="col s6">
-                        <table id="tasks" class="bordered striped">
+                        <table id="tasks" class="bordered">
                             <tbody>
                             {% for task in story.tasks %}
                                 <tr>
@@ -101,7 +105,7 @@
                         </tr>
                     </div>
                     <div class="col s6">
-                        <table id="efforts" class="bordered striped">
+                        <table id="efforts" class="bordered">
                             <tbody>
                             {% for effort in story.spendEfforts %}
                                 <tr>

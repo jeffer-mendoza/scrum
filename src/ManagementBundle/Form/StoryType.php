@@ -38,6 +38,23 @@ class StoryType extends AbstractType
                     '4' => 'ACEPTADO',
                 )
             ))
+            ->add('points', ChoiceType::class, array(
+                'choices' => array(
+                    '0' => '1',
+                    '1' => '2',
+                    '2' => '3',
+                    '4' => '5',
+                    '8' => '8',
+                    '13' => '13',
+                    '21' => '21',
+                    '34' => '34',
+                    '55' => '55',
+                    '89' => '89',
+                    '144' => '144',
+                    '233' => '233',
+                    '377' => '377',
+                )
+            ))
             ->add('effort', ChoiceType::class, array(
                 'choices' => array(
                     '0' => '0h',
@@ -48,12 +65,8 @@ class StoryType extends AbstractType
                     '16' => '16h',
                 )
             ))
-            ->add('startDate', DateType::class, array('widget' => 'single_text', 'format' => 'yyyy-MM-dd','attr' => array('class' => '')))
-            ->add('dueDate', DateType::class, array('widget' => 'single_text', 'format' => 'yyyy-MM-dd', 'attr' => array('class' => '')))
-            ->add('sprint')
-            ->add('activity')
-            ->add('project')
-            ->add('parentStory');
+            ->add('module')
+            ->add('sprint');
     }
 
     /**

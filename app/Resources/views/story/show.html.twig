@@ -3,8 +3,8 @@
 {% block panel_actions %}
     <a class="boton boton-default" href="{{ path('story_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
     <a class="boton boton-default" href="{{ path('report_story_pdf', {'id': story.id}) }}"><i class="fa fa-file-pdf-o"></i> </a>
+    <a class="boton boton-default" href="{{ path('report_story_image', {'id': story.id}) }}"><i class="fa fa-file-image-o"></i> </a>
     <a class="boton boton-default" href="{{ path('story_edit', { 'id': story.id }) }}">Edit</a>
-
 {% endblock %}
 {% block panel_title %}
     {{ story.id }} - {{ story.title }}

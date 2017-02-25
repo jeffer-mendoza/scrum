@@ -42,7 +42,7 @@ class ReportController extends Controller
 
         $stories = $em->getRepository('ManagementBundle:Story')->findAll();
 
-        $html = $this->renderView('report/product-backlog.html.twig', array( 'stories' => $stories
+        $html = $this->renderView('report/story-list.html.twig', array( 'stories' => $stories
         ));
         $nameFile = "GD-Stories-list.pdf";
 

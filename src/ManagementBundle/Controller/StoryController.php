@@ -26,7 +26,7 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $stories = $em->getRepository('ManagementBundle:Story')->findAll();
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array(),array('id'=>'ASC'));
 
         return $this->render('story/index.html.twig', array(
             'stories' => $stories,

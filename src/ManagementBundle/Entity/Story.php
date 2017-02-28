@@ -325,7 +325,7 @@ class Story
                     if ($this->status == Story::ACCEPT) {
                         return "ACEPTADA";
                     } else {
-                        return "NONE";
+                        return "--";
                     }
                 }
             }

@@ -38,7 +38,8 @@ class SprintController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function sprintsAction(){
+    public function sprintsAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $sprints = $em->getRepository('ManagementBundle:Sprint')->findAll();
 
@@ -82,10 +83,14 @@ class SprintController extends Controller
     public function showAction(Sprint $sprint)
     {
         $deleteForm = $this->createDeleteForm($sprint);
+        $array = $sprint->getBurndown();
+        $string = json_encode($array, JSON_NUMERIC_CHECK);
+        $string = str_replace('"', '', $string);
 
         return $this->render('sprint/show.html.twig', array(
             'sprint' => $sprint,
             'delete_form' => $deleteForm->createView(),
+            'array' => $string
         ));
     }
 
@@ -148,7 +153,6 @@ class SprintController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('sprint_delete', array('id' => $sprint->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

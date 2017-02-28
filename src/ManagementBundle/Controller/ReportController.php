@@ -10,6 +10,7 @@ use ManagementBundle\Entity\Project;
 use ManagementBundle\Form\ProjectType;
 use Symfony\Component\HttpFoundation\Response;
 use ManagementBundle\Entity\Story;
+use ManagementBundle\Entity\Sprint;
 
 /**
  * Project controller.
@@ -58,6 +59,7 @@ class ReportController extends Controller
         return $this->render('report/pdf.html.twig', array('story' => $story));
 
     }
+
     /**
      * Generate user story in pdf format
      *
@@ -97,7 +99,7 @@ class ReportController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $stories = $em->getRepository('ManagementBundle:Story')->findAll();
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array(), array('id' => 'ASC'));
 
         $html = $this->renderView('report/product-backlog-image.html.twig', array( 'stories' => $stories
         ));
@@ -170,5 +172,60 @@ class ReportController extends Controller
 
 
     }
+
+
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/sprint-backlog/{id}/pdf", name="report_sprint_backlog_pdf")
+     * @Method("GET")
+     * @return Response
+     */
+    public function sprintBacklogPdfAction(Sprint $sprint)
+    {
+        $stories = $sprint->getStories();
+
+        $html = $this->renderView('report/sprint-backlog.html.twig', array('sprint' => $sprint, 'stories' => $stories
+        ));
+        $nameFile = "iteration-".$sprint->getId()."-".strtolower($sprint->getName())."-sprint.jpg";
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
+            )
+        );
+
+    }
+
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/sprint-backlog/{id}/image", name="report_sprint_backlog_image")
+     * @Method("GET")
+     * @return Response
+     */
+    public function sprintBacklogImageAction(Sprint $sprint)
+    {
+        $stories = $sprint->getStories();
+
+        $html = $this->renderView('report/sprint-backlog-image.html.twig', array('sprint' => $sprint, 'stories' => $stories
+        ));
+        $nameFile = "iteration-".$sprint->getId()."-".strtolower($sprint->getName())."-sprint.jpg";
+
+        return new Response(
+            $this->get('knp_snappy.image')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'image/jpg',
+                'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
+            )
+        );
+
+    }
+
+
 
 }

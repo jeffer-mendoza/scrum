@@ -29,6 +29,27 @@ class Sprint
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="duration", type="smallint", nullable=true)
+     */
+    private $duration;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objective", type="string", length=1000, nullable=true)
+     */
+    private $objective;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="effort", type="smallint", nullable=true)
+     */
+    private $effort;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="start_date", type="datetime")
@@ -176,11 +197,86 @@ class Sprint
         $this->stories = $stories;
     }
 
+    /**
+     * @return string
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param string $duration
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getObjective()
+    {
+        return $this->objective;
+    }
+
+    /**
+     * @param string $objective
+     */
+    public function setObjective($objective)
+    {
+        $this->objective = $objective;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEffort()
+    {
+        return $this->effort;
+    }
+
+    /**
+     * @param $effort
+     */
+    public function setEffort($effort)
+    {
+        $this->effort = $effort;
+    }
 
 
     function __toString()
     {
        return $this->name;
+    }
+
+    /**
+     *
+     */
+    function getBurndown(){
+        $array = array();
+        $effortTotal = 0;
+        $arrayControl = array_fill(0,count($this->stories),0);//permite conocer que esfuerzos ya se habian agregado
+        foreach ($this->stories as $story){
+            $effortTotal += $story->getEffort();
+        }
+        foreach ($this->stories as $story) {
+            foreach ($story->getSpendEfforts() as $effort){
+                //$array[$this->startDate - $effort->getDate()] += $effort->getEffort();
+                $x = $this->startDate->diff($effort->getDate())->format('%a');
+                $y = $effortTotal - $effort->getEffort();
+
+                $array []= array (
+                    'x' => $x,
+                    'y' => $y,
+                );
+                $effortTotal = $y;
+            }
+
+        }
+
+        return $array;
     }
 
 

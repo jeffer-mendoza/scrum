@@ -1,0 +1,4 @@
+univalle_security:
+    resource: "@UnivalleSecurityBundle/Controller/"
+    type:     annotation
+    prefix:   /

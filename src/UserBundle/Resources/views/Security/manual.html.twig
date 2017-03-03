@@ -1,0 +1,24 @@
+{% extends 'UnivalleSecurityBundle:Security:layout.html.twig' %}
+{% block title %}Documentación{% endblock %}
+{% block panel_body%}
+<div class="alert alert-success">
+    Bienvenido a la documentación.
+</div>
+<div class="list-group">
+    <a href="{{path("login_olvide_pass_primer_login")}}" class="list-group-item ">
+        <h4 class="list-group-item-heading">Primera vez que ingresa.</h4>
+        <p class="list-group-item-text">Si es la primera vez que ingresa, por defecto, el usuario y la contraseña es el mismo código del estudiante. <strong>Más información.</strong></p>
+    </a>
+    <a href="{{path("login_problemas_resolucion")}}" class="list-group-item ">
+        <h4 class="list-group-item-heading">Menos del 70% de los creditos aprobados</h4>
+        <p class="list-group-item-text">Si al intentar ingresar le aparece este mensaje, <strong>Consulte aquí.</strong></p>
+    </a>
+    <a href="{{path("login_olvide_pass")}}" class="list-group-item ">
+        <h4 class="list-group-item-heading">Problema con la contraseña</h4>
+        <p class="list-group-item-text">Si no puede ingresar al sistema por problemas con la contraseña, consulte para <strong>Más información.</strong></p>
+    </a>
+</div>
+<div class="alert alert-warning">
+    Para documentación más detallada, <a href="{{path("fos_user_security_login")}}" class="alert-link">inicie sesión. </a>
+</div>
+{% endblock %}

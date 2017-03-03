@@ -14,20 +14,7 @@
     <div class="row">
         <div id="menu" class="col s2">
             <ul>
-                <li><a href="{{ path('story_index') }}">Backlogs</a></li>
-                <li><a href="{{ path('sprint_index') }}">Sprint</a></li>
-                <li><a href="{{ path('rol_index') }}">Role</a></li>
-                <li><a href="{{ path('meet_index') }}">Meet</a></li>
-                <li><a href="{{ path('management_homepage') }}">Board</a></li>
-                <li><a href="{{ path('report_index') }}">Report</a></li>
-                <li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Dropdown <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        {{ render(controller('ManagementBundle:Sprint:sprints')) }}
-                    </ul>
-                </li>
+                {{ render(controller('ManagementBundle:Project:projects')) }}
             </ul>
         </div>
         <div class="col s10">
@@ -43,6 +30,8 @@
     <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.css') }}"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

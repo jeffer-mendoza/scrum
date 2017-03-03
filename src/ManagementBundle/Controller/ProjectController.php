@@ -24,16 +24,29 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $projects = $em->getRepository('ManagementBundle:Project')->findAll();
+        global $kernel;
+        $token = $kernel->getContainer()->get('security.token_storage')->getToken();
+        if (!is_object($user = $token->getUser())) {
+            return null;
+        }
+        $projects = array();
+        foreach ($user->getProjects() as $project){
+
+            $projects[] = $project->getProject();
+        }
+
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $projects = $em->getRepository('ManagementBundle:Project')->findAll();
 
         return $this->render('project/index.html.twig', array(
             'projects' => $projects,
         ));
     }
 
-    public function projectsAction(){
+    public function projectsAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $projects = $em->getRepository('ManagementBundle:Project')->findAll();
 
@@ -146,7 +159,6 @@ class ProjectController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('project_delete', array('id' => $project->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -69,6 +69,15 @@ class Project
      * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Rol", mappedBy="project")
      */
     private $roles;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\UserProject", mappedBy="project")
+     */
+    private $users;
+
+
     /**
      * Get id
      *

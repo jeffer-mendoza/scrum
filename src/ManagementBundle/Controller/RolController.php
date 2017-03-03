@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ManagementBundle\Entity\Rol;
 use ManagementBundle\Form\RolType;
+use ManagementBundle\Entity\Project;
 
 /**
  * Rol controller.
@@ -19,14 +20,14 @@ class RolController extends Controller
     /**
      * Lists all Rol entities.
      *
-     * @Route("/", name="rol_index")
+     * @Route("/{id}", name="rol_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Project $project)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $rols = $em->getRepository('ManagementBundle:Rol')->findAll();
+        $rols = $em->getRepository('ManagementBundle:Rol')->findBy(array('project'=>$project->getId()),array('id'=> 'ASC'));
 
         return $this->render('rol/index.html.twig', array(
             'rols' => $rols,

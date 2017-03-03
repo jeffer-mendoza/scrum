@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ManagementBundle\Entity\Story;
 use ManagementBundle\Form\StoryType;
+use ManagementBundle\Entity\Project;
 
 /**
  * Story controller.
@@ -19,14 +20,14 @@ class StoryController extends Controller
     /**
      * Lists all Story entities.
      *
-     * @Route("/", name="story_index")
+     * @Route("/{id}", name="story_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Project $project)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array(),array('id'=>'ASC'));
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('project' => $project->getId() ),array('id'=>'ASC'));
 
         return $this->render('story/index.html.twig', array(
             'stories' => $stories,

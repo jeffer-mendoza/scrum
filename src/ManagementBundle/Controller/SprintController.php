@@ -2,6 +2,7 @@
 
 namespace ManagementBundle\Controller;
 
+use ManagementBundle\Entity\Project;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -19,14 +20,14 @@ class SprintController extends Controller
     /**
      * Lists all Sprint entities.
      *
-     * @Route("/", name="sprint_index")
+     * @Route("/{id}", name="sprint_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Project $project)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sprints = $em->getRepository('ManagementBundle:Sprint')->findAll();
+        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('id'=>'ASC'));
 
         return $this->render('sprint/index.html.twig', array(
             'sprints' => $sprints,

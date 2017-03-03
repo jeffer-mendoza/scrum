@@ -5,11 +5,11 @@
             {{ project.name }} <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li><a href="{{ path('story_index') }}">Backlogs</a></li>
-            <li><a href="{{ path('sprint_index') }}">Sprint</a></li>
-            <li><a href="{{ path('rol_index') }}">Role</a></li>
-            <li><a href="{{ path('meet_index') }}">Meet</a></li>
-            <li><a href="{{ path('management_homepage') }}">Board</a></li>
+            <li><a href="{{ path('story_index',{'id': project.id}) }}">Backlogs</a></li>
+            <li><a href="{{ path('sprint_index',{'id': project.id}) }}">Sprint</a></li>
+            <li><a href="{{ path('rol_index',{'id': project.id}) }}">Role</a></li>
+            <li><a href="{{ path('meet_index',{'id': project.id}) }}">Meet</a></li>
+            <li><a href="{{ path('management_homepage',{'id': project.id}) }}">Board</a></li>
             <li><a href="{{ path('report_index') }}">Report</a></li>
             <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

@@ -5,7 +5,9 @@ namespace ManagementBundle\Controller;
 use ManagementBundle\Entity\Meet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use ManagementBundle\Entity\Project;
 
 /**
  * Meet controller.
@@ -17,14 +19,14 @@ class MeetController extends Controller
     /**
      * Lists all meet entities.
      *
-     * @Route("/", name="meet_index")
+     * @Route("/{id}", name="meet_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Project $project)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $meets = $em->getRepository('ManagementBundle:Meet')->findAll();
+        $meets = $em->getRepository('ManagementBundle:Meet')->findBy(array('project' => $project->getId()), array('id'=>'ASC'));
 
         return $this->render('meet/index.html.twig', array(
             'meets' => $meets,

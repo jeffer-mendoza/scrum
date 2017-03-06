@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
 
 
 class CreateStoryType extends AbstractType
@@ -19,7 +21,23 @@ class CreateStoryType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('rol')
+            ->add('rol', EntityType::class, array(
+                'class' => 'ManagementBundle:Rol',
+                'query_builder' => function (EntityRepository $er) {
+                    global $kernel;
+                    $token = $kernel->getContainer()->get('security.token_storage')->getToken();
+                    if (!is_object($user = $token->getUser())) {
+                        return null;
+                    }
+                    $projects = array();
+                    foreach ($user->getProjects()as $project){
+                        $projects[]= $project->getProject()->getId();
+                    }
+
+                    return $er->createQueryBuilder('r')
+                        ->innerJoin('r.project', 'p', 'WITH', 'r.project in ('.implode(",",$projects).")");
+                },
+            ))
             ->add('want', null, array('attr' => array('value' => 'deseo ')))
             ->add('soThat', null, array('attr' => array('value' => 'para ')))
             ->add('priority', ChoiceType::class, array(

@@ -24,6 +24,13 @@ class Project
     /**
      * @var string
      *
+     * @ORM\Column(name="name_id", type="string", length=255, nullable=true)
+     */
+    private $nameId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -179,6 +186,24 @@ class Project
     {
         return $this->dueDate;
     }
+
+    /**
+     * @return string
+     */
+    public function getNameId()
+    {
+        return $this->nameId;
+    }
+
+    /**
+     * @param string $nameId
+     */
+    public function setNameId($nameId)
+    {
+        $this->nameId = $nameId;
+    }
+
+
 
     function __toString()
     {

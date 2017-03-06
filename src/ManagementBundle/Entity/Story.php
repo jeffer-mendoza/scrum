@@ -164,6 +164,7 @@ class Story
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\AcceptanceRequirement", mappedBy="story",cascade={"persist"})
+     * @ORM\OrderBy({"startDate" = "ASC"})
      */
     private $acceptanceRequirements;
 

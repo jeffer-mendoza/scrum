@@ -1,45 +1,29 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Project list</h1>
+{% block panel_title %}Project list{% endblock %}
+{% block panel_actions %}
+    <a class="boton boton-default" href="{{ path('project_new') }}">New Project</a>
+{% endblock %}
 
-     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Startdate</th>
-                <th>Duedate</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    {% block th %}
+        <th>Id Name</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start date</th>
+        <th>Due date</th>
+    {% endblock %}
+
+    {% block td %}
         {% for project in projects %}
             <tr>
-                <td><a class="btn btn-default" href="{{ path('project_show', { 'id': project.id }) }}">{{ project.id }}</a></td>
                 <td>{{ project.name }}</td>
                 <td>{{ project.description }}</td>
                 <td>{% if project.startDate %}{{ project.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>
                 <td>{% if project.dueDate %}{{ project.dueDate|date('d-M-Y H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a class="btn btn-default" href="{{ path('project_show', { 'id': project.id }) }}"><i  class="fa fa-eye"></i></a>
-                        </li>
-                        <li>
-                            <a class="btn btn-default" href="{{ path('project_edit', { 'id': project.id }) }}"><i  class="fa fa-pencil"></i></a>
-                        </li>
-                    </ul>
+                    <a class="btn btn-default" href="{{ path('project_show', { 'id': project.id }) }}"><i  class="fa fa-eye"></i></a>
+                    <a class="btn btn-default" href="{{ path('project_edit', { 'id': project.id }) }}"><i  class="fa fa-pencil"></i></a>
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a class="btn btn-default" href="{{ path('project_new') }}">Create a new entry</a>
-        </li>
-    </ul>
-{% endblock %}
+    {% endblock %}

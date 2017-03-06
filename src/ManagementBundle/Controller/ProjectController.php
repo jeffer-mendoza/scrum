@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ManagementBundle\Entity\Project;
 use ManagementBundle\Form\ProjectType;
+use UserBundle\Entity\User;
 
 /**
  * Project controller.
@@ -19,12 +20,28 @@ class ProjectController extends Controller
     /**
      * Lists all Project entities.
      *
-     * @Route("/", name="project_index")
+     * @Route("/{id}", name="project_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+        $projects = array();
+        $userprojects =$user->getProjects();
+        foreach ( $userprojects as $project){
 
+            $projects[] = $project->getProject();
+        }
+//        $projects = $em->getRepository('ManagementBundle:Project')->findAll();
+
+        return $this->render('project/index.html.twig', array(
+            'projects' => $projects,
+        ));
+    }
+
+    public function projectsAction()
+    {
         global $kernel;
         $token = $kernel->getContainer()->get('security.token_storage')->getToken();
         if (!is_object($user = $token->getUser())) {
@@ -35,20 +52,6 @@ class ProjectController extends Controller
 
             $projects[] = $project->getProject();
         }
-
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $projects = $em->getRepository('ManagementBundle:Project')->findAll();
-
-        return $this->render('project/index.html.twig', array(
-            'projects' => $projects,
-        ));
-    }
-
-    public function projectsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository('ManagementBundle:Project')->findAll();
 
         return $this->render('project/projects.html.twig', array(
             'projects' => $projects,

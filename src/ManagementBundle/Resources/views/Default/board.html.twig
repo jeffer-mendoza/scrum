@@ -1,0 +1,72 @@
+
+{% extends 'layout.html.twig' %}
+{% block body %}
+    <br>
+    <div class="row">
+        <div class="col l12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#todo">TO DO</a></li>
+                <li class="tab col s3"><a class="active" href="#inprogress">IN PROGRESS</a></li>
+                <li class="tab col s3"><a href="#done">DONE</a></li>
+                <li class="tab col s3"><a href="#accept">ACCEPT</a></li>
+            </ul>
+        </div>
+        <div id="todo" class="col s12">
+            <div class="col l6">
+                <h4>TO DO</h4>
+                {% for story in stories_todo %}
+                    <div class="row">
+                        <div class="col s12 m5">
+                            <div class="card-panel teal hoverable">
+                                <span class="white-text">{{ story.title }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="inprogress" class="col s12">
+            <h4>IN PROGRESS</h4>
+            <div class="col l6">
+                {% for story in stories_inprogress %}
+                    <div class="row">
+                        <div class="col s12 m5">
+                            <div class="card-panel teal hoverable">
+                                <span class="white-text">{{ story.title }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="done" class="col s12">
+            <div class="col l6">
+                <h4>DONE</h4>
+                {% for story in stories_done %}
+                    <div class="row">
+                        <div class="col s12 m5">
+                            <div class="card-panel teal hoverable">
+                                <span class="white-text">{{ story.title }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="accept" class="col s12">
+            <div class="col l6">
+                <h4>ACCEPT</h4>
+                {% for story in stories_accept %}
+                    <div class="row">
+                        <div class="col s12 m5">
+                            <div class="card-panel teal hoverable">
+                                <span class="white-text">{{ story.title }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

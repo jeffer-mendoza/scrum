@@ -53,6 +53,14 @@ class Meet
      */
     private $detail;
 
+    /**
+     * @var \ManagementBundle\Entity\Project
+     *
+     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Project")
+     * @ORM\JoinColumn(name="project", referencedColumnName="id")
+     */
+    private $project;
+
 
     /**
      * Set detail
@@ -108,6 +116,24 @@ class Meet
     {
         $this->decisions = $decisions;
     }
+
+    /**
+     * @return Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+
 
 }
 

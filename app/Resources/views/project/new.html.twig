@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a class="btn btn-default" href="{{ path('project_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+            <a class="btn btn-default" href="{{ path('project_index',{'id': app.user.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
         </li>
     </ul>
 {% endblock %}

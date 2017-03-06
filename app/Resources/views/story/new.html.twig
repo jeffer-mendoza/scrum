@@ -2,7 +2,7 @@
 
 {% block panel_title %}Story Creation{% endblock %}
 {% block panel_actions %}
- <a class="btn" href="{{ path('story_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+ <a class="btn" href="{{ path('story_index', {'id': project.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 {% endblock %}
 {% block panel_body %}
     {{ form_start(form) }}

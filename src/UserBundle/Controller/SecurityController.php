@@ -30,12 +30,8 @@ class SecurityController extends BaseController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         if ($error) {
-            echo var_dump($error);
-            exit;
             if (get_class($error) == 'Symfony\Component\Security\Core\Exception\BadCredentialsException') {
                 $this->setMensaje('error', 'Código de usuario y/o número de referencia son incorrectos. Verifique el código y número de referencia que figura en la clave de acceso que le entregó el banco.');
-
-
             }
         }
 
@@ -72,7 +68,7 @@ class SecurityController extends BaseController
 
         $autorization = $this->container->get("security.authorization_checker");
 
-        if (!$this->ip_pertenece_a_red($request->getClientIp(), $usuario->getDireccionIp()  )) {
+        if (!$this->ip_pertenece_a_red($request->getClientIp(), $usuario->getDireccionIp())) {
             $this->container->get('security.context')->setToken(null);
             $this->setMensaje('error', 'Acceso Denegado. El usuario no está autorizado para ingresar a través de la dirección IP: ' . $request->getClientIp());
 
@@ -137,13 +133,13 @@ class SecurityController extends BaseController
 
     private function ip_pertenece_a_red($str_ip, $str_rango)
     {
-        if($str_rango == '0.0.0.0'){
+        if ($str_rango == '0.0.0.0') {
 
             $username = $this->getUser()->getUsername();
-            if($username == 'jeffer' || $username == '1130586353'){
+            if ($username == 'jeffer' || $username == '1130586353') {
                 return true;
 
-            }else{
+            } else {
                 return false;
             }
         }

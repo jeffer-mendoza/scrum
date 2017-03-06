@@ -5,7 +5,8 @@ namespace ManagementBundle\Controller;
 use ManagementBundle\Entity\Story;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ManagementBundle\Entity\Project;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * Story controller.
  *
@@ -16,10 +17,24 @@ class DefaultController extends Controller
     /**
      * Lists all meet entities.
      *
-     * @Route("/{id}", name="management_homepage")
+     * @Route("/", name="management_homepage")
      * @Method("GET")
      */
-    public function indexAction(Project $project)
+    public function indexAction()
+    {
+
+
+        return $this->render('ManagementBundle:Default:index.html.twig', array(
+        ));
+    }
+
+    /**
+     * Lists all meet entities.
+     *
+     * @Route("/{id}", name="management_board")
+     * @Method("GET")
+     */
+    public function boardAction(Project $project)
     {
 
         $em = $this->getDoctrine()->getManager();

@@ -31,6 +31,7 @@ class SprintController extends Controller
 
         return $this->render('sprint/index.html.twig', array(
             'sprints' => $sprints,
+            'project' => $project,
         ));
     }
 
@@ -52,12 +53,13 @@ class SprintController extends Controller
     /**
      * Creates a new Sprint entity.
      *
-     * @Route("/new", name="sprint_new")
+     * @Route("/new/{id}", name="sprint_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Project $project)
     {
         $sprint = new Sprint();
+        $sprint->setProject($project);
         $form = $this->createForm('ManagementBundle\Form\SprintType', $sprint);
         $form->handleRequest($request);
 

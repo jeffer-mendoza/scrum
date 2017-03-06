@@ -8,12 +8,23 @@
 </head>
 <body>
 {% block content %}
-    <div class="teal-text">
-        Scrum Management
-    </div>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">Setting</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out"></i>Exit</a></li>
+    </ul>
+    <nav style="margin-bottom: 2px">
+        <div class="nav-wrapper" style="background-color: #414141;">
+            <a href="#" class="brand-logo">Scrum Management</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{{ app.user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="row">
         <div id="menu" class="col s2">
             <ul>
+                {#<li><a href="{{ path('project_index',{'id': app.user.id}) }}">Projects</a></li>#}
                 {{ render(controller('ManagementBundle:Project:projects')) }}
             </ul>
         </div>

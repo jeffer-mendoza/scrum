@@ -31,16 +31,17 @@ class StoryController extends Controller
 
         return $this->render('story/index.html.twig', array(
             'stories' => $stories,
+            'project' => $project,
         ));
     }
 
     /**
      * Creates a new Story entity.
      *
-     * @Route("/new", name="story_new")
+     * @Route("/new/{id}", name="story_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Project $project)
     {
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('ManagementBundle:Project')->find(1);
@@ -59,6 +60,7 @@ class StoryController extends Controller
 
         return $this->render('story/new.html.twig', array(
             'story' => $story,
+            'project' => $project,
             'form' => $form->createView(),
         ));
     }

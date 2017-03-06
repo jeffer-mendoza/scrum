@@ -110,7 +110,7 @@ class Rol
     /**
      * Set project
      *
-     * @param \stdClass $project
+     * @param \ManagementBundle\Entity\Project $project
      * @return Rol
      */
     public function setProject($project)
@@ -123,7 +123,7 @@ class Rol
     /**
      * Get project
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Project
      */
     public function getProject()
     {

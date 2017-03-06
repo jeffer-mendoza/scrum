@@ -31,18 +31,20 @@ class RolController extends Controller
 
         return $this->render('rol/index.html.twig', array(
             'rols' => $rols,
+            'project' => $project
         ));
     }
 
     /**
      * Creates a new Rol entity.
      *
-     * @Route("/new", name="rol_new")
+     * @Route("/new/{id}", name="rol_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Project $project)
     {
         $rol = new Rol();
+        $rol->setProject($project);
         $form = $this->createForm('ManagementBundle\Form\RolType', $rol);
         $form->handleRequest($request);
 
@@ -51,11 +53,12 @@ class RolController extends Controller
             $em->persist($rol);
             $em->flush();
 
-            return $this->redirectToRoute('rol_index', array('id' => $rol->getId()));
+            return $this->redirectToRoute('rol_index', array('id' => $project->getId()));
         }
 
         return $this->render('rol/new.html.twig', array(
             'rol' => $rol,
+            'project' => $project,
             'form' => $form->createView(),
         ));
     }

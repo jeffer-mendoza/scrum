@@ -2,15 +2,18 @@
 
 {% block panel_title %}Rol - Edit{% endblock %}
 {% block panel_actions %}
-    <a class="waves-effect waves-light btn" href="{{ path('rol_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+    <a class="boton-default boton" href="{{ path('rol_index',{'id': rol.project.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>
-    {{ form_start(delete_form) }}
-    <input class="waves-effect waves-light btn" type="submit" value="Delete">
-    {{ form_end(delete_form) }}
+
 {% endblock %}
 {% block panel_body %}
     {{ form_start(edit_form) }}
     {{ form_widget(edit_form) }}
     <input class="waves-effect waves-light btn" type="submit" value="Edit" />
     {{ form_end(edit_form) }}
+    <div class="text-right">
+        {{ form_start(delete_form) }}
+        <input class="boton-default boton" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block panel_title %}Rol list{% endblock %}
 {% block panel_actions %}
-    <a class="boton boton-default" href="{{ path('rol_new') }}">New rol</a>
+    <a class="boton boton-default" href="{{ path('rol_new',{'id': project.id}) }}">New rol</a>
 {% endblock %}
 
     {% block th %}

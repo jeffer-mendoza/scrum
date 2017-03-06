@@ -17,7 +17,6 @@ class RolType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('project')
         ;
     }
     

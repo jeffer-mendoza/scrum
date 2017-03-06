@@ -9,8 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * Story controller.
- *
- * @Route("/board")
  */
 class DefaultController extends Controller
 {
@@ -31,7 +29,7 @@ class DefaultController extends Controller
     /**
      * Lists all meet entities.
      *
-     * @Route("/{id}", name="management_board")
+     * @Route("/board/{id}", name="management_board")
      * @Method("GET")
      */
     public function boardAction(Project $project)

@@ -22,7 +22,7 @@ class StoryType extends AbstractType
         //para obtener el objeto con el que se está construyendo el form
         $project = $builder->getData()->getProject();
         $idProject = $project->getId();
-        
+
         $builder
             ->add('title')
             ->add('rol', EntityType::class, array(
@@ -79,6 +79,7 @@ class StoryType extends AbstractType
             ))
             ->add('module', EntityType::class, array(
                 'class' => 'ManagementBundle:Module',
+                'required' => true,
                 'placeholder' => 'Choose an module',
                 'query_builder' => function (EntityRepository $er) use ($idProject) {
 

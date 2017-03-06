@@ -42,7 +42,7 @@ class DefaultController extends Controller
         $stories_done = $em->getRepository('ManagementBundle:Story')->findBy(array('status' => Story::DONE,'project' => $project->getId()));
         $stories_accept = $em->getRepository('ManagementBundle:Story')->findBy(array('status' => Story::ACCEPT,'project' => $project->getId()));
 
-        return $this->render('ManagementBundle:Default:index.html.twig', array(
+        return $this->render('ManagementBundle:Default:board.html.twig', array(
             'stories_todo' => $stories_todo,
             'stories_inprogress' => $stories_inprogress,
             'stories_done' => $stories_done,

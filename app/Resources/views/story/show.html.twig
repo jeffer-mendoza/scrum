@@ -1,21 +1,18 @@
 {% extends 'layout.html.twig' %}
 
 {% block panel_actions %}
-    <a class="boton boton-default" href="{{ path('story_index', {'id': story.project.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
-    <a class="boton boton-default" href="{{ path('report_story_pdf', {'id': story.id}) }}"><i class="fa fa-file-pdf-o"></i> </a>
-    <a class="boton boton-default" href="{{ path('report_story_image', {'id': story.id}) }}"><i class="fa fa-file-image-o"></i> </a>
+    <a class="boton boton-default" href="{{ path('story_index', {'id': story.project.id}) }}"><i
+                class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+    <a class="boton boton-default" href="{{ path('report_story_pdf', {'id': story.id}) }}"><i
+                class="fa fa-file-pdf-o"></i> </a>
+    <a class="boton boton-default" href="{{ path('report_story_image', {'id': story.id}) }}"><i
+                class="fa fa-file-image-o"></i> </a>
     <a class="boton boton-default" href="{{ path('story_edit', { 'id': story.id }) }}">Edit</a>
 {% endblock %}
 {% block panel_title %}
-    {{ story.id }} - {{ story.title }}
-{%  endblock %}
+    {{ story.number }} - {{ story.title }}
+{% endblock %}
 {% block panel_body %}
-    <br>
-    {{ form_start(delete_form) }}
-    <input class="waves-effect waves-light btn" type="submit" value="Delete">
-    {{ form_end(delete_form) }}
-    <br>
-
     <table class="table bordered">
 
         <tr>
@@ -46,7 +43,7 @@
 {% block footer %}
     <ul class="collapsible" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header" ><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
+            <div class="collapsible-header"><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
             <div class="collapsible-body">
                 <table id="acceptance" class="bordered">
                     <tbody>
@@ -55,7 +52,8 @@
                             <td>{{ acceptance.description }}</td>
                             <td>{{ acceptance.stracceptance }}</td>
                             <td>
-                                <a class="btn" href="{{ path('acceptance_requirement_delete', { 'id': acceptance.id }) }}"><i
+                                <a class="btn"
+                                   href="{{ path('acceptance_requirement_delete', { 'id': acceptance.id }) }}"><i
                                             class="fa fa-trash"></i></a>
                             </td>
                         </tr>
@@ -132,7 +130,9 @@
                                         </select>
                                     </div>
                                     <div class="col s2">
-                                        <button id="save-effort" data-story="{{ story.id }}" data-url="{{ path('spend_effort_new') }}" class="btn"><i class="fa fa-save"></i></button>
+                                        <button id="save-effort" data-story="{{ story.id }}"
+                                                data-url="{{ path('spend_effort_new') }}" class="btn"><i
+                                                    class="fa fa-save"></i></button>
                                     </div>
                                 </div>
                             </td>
@@ -171,7 +171,11 @@
             </div>
         </li>
     </ul>
-
+    <div class="text-right">
+        {{ form_start(delete_form) }}
+        <input class="boton boton-default" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -268,7 +272,7 @@
                 },
                 success: function (data) {
                     console.log('ento');
-                    $('#efforts').append('<tr><td>' + $("#save-effort-date").val() + '</td><td>'+$("#save-effort-effort").val()+'h<td></tr>');
+                    $('#efforts').append('<tr><td>' + $("#save-effort-date").val() + '</td><td>' + $("#save-effort-effort").val() + 'h<td></tr>');
                     $('#save-effort-effort').val('');
                 }
             });

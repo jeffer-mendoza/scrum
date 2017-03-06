@@ -57,6 +57,13 @@ class Project
     private $dueDate;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="counter", type="integer", nullable=true)
+     */
+    private $counter = 0;
+
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Story", mappedBy="project")
@@ -209,7 +216,21 @@ class Project
         $this->nameId = $nameId;
     }
 
+    /**
+     * @return int
+     */
+    public function getCounter()
+    {
+        return $this->counter;
+    }
 
+    /**
+     * @param int $counter
+     */
+    public function setCounter($counter)
+    {
+        $this->counter = $counter;
+    }
 
     function __toString()
     {

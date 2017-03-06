@@ -79,6 +79,7 @@ class CreateStoryType extends AbstractType
             ->add('module', EntityType::class, array(
                 'class' => 'ManagementBundle:Module',
                 'placeholder' => 'Choose an module',
+                'required' => false,
                 'query_builder' => function (EntityRepository $er) use ($idProject) {
 
                     return $er->createQueryBuilder('m')
@@ -89,6 +90,7 @@ class CreateStoryType extends AbstractType
             ->add('sprint', EntityType::class, array(
                 'class' => 'ManagementBundle:Sprint',
                 'placeholder' => 'Choose an sprint',
+                'required' => false,
                 'query_builder' => function (EntityRepository $er) use ($idProject) {
 
                     return $er->createQueryBuilder('s')

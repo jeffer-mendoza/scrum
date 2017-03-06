@@ -27,7 +27,7 @@ class SprintController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('id'=>'ASC'));
+        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('id' => 'ASC'));
 
         return $this->render('sprint/index.html.twig', array(
             'sprints' => $sprints,
@@ -142,7 +142,8 @@ class SprintController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('sprint_index');
+        return $this->redirectToRoute('story_index', array('id' => $sprint->getProject()->getId()));
+
     }
 
     /**

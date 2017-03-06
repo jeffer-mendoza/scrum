@@ -36,6 +36,14 @@ class Story
      */
     private $id;
 
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="number", type="integer", nullable=true)
+     */
+    private $number;
+
     /**
      * @var string
      *
@@ -108,7 +116,7 @@ class Story
     private $sprint;
 
     /**
-     * @var \ManagementBundle\Entity\Activity
+     * @var \ManagementBundle\Entity\Module
      *
      * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Module", inversedBy="stories")
      * @ORM\JoinColumn(name="module", referencedColumnName="id")
@@ -453,6 +461,8 @@ class Story
     public function setProject($project)
     {
         $this->project = $project;
+        $this->project->setCounter($project->getCounter() +1);
+        $this->number = $project->getCounter();
 
         return $this;
     }
@@ -648,5 +658,23 @@ class Story
     {
         $this->points = $points;
     }
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
+
+
 
 }

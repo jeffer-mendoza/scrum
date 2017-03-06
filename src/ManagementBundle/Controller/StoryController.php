@@ -28,7 +28,7 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('project' => $project->getId() ),array('id'=>'ASC'));
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('project' => $project->getId() ),array('number'=>'ASC'));
 
         return $this->render('story/index.html.twig', array(
             'stories' => $stories,
@@ -53,6 +53,7 @@ class StoryController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($story);
+            $em->persist($project);
             $em->flush();
 
             return $this->redirectToRoute('story_show', array('id' => $story->getId()));
@@ -125,7 +126,7 @@ class StoryController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('story_index');
+        return $this->redirectToRoute('story_index',array('id' => $story->getProject()->getId()));
     }
 
     /**

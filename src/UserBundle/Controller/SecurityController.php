@@ -31,7 +31,7 @@ class SecurityController extends BaseController
         $lastUsername = $authenticationUtils->getLastUsername();
         if ($error) {
             if (get_class($error) == 'Symfony\Component\Security\Core\Exception\BadCredentialsException') {
-                $this->setMensaje('error', 'Código de usuario y/o número de referencia son incorrectos. Verifique el código y número de referencia que figura en la clave de acceso que le entregó el banco.');
+                $this->setMensaje('error', 'You enter inconrrect password or username');
             }
         }
 
@@ -70,7 +70,7 @@ class SecurityController extends BaseController
 
         if (!$this->ip_pertenece_a_red($request->getClientIp(), $usuario->getDireccionIp())) {
             $this->container->get('security.context')->setToken(null);
-            $this->setMensaje('error', 'Acceso Denegado. El usuario no está autorizado para ingresar a través de la dirección IP: ' . $request->getClientIp());
+            $this->setMensaje('error', 'Access Denied. Unauthorized user with IP: ' . $request->getClientIp());
 
             return $this->redirect('login');
         }

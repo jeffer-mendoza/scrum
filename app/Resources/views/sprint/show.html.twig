@@ -1,4 +1,4 @@
-        {% extends 'layout.html.twig' %}
+{% extends 'layout.html.twig' %}
 
         {% block panel_title %}
             {{ sprint.id }} - {{ sprint.name }}
@@ -8,7 +8,8 @@
         {% endblock %}
 
         {% block panel_actions %}
-            <a class="boton boton-default" href="{{ path('sprint_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <a class="boton boton-default" href="{{ path('sprint_index', {'id' : sprint.project.id}) }}"><i
+                        class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
             <a class="boton boton-default" href="{{ path('sprint_edit', { 'id': sprint.id }) }}">Edit</a>
             <a class="boton boton-default" href="{{ path('report_sprint_backlog_pdf', {'id': sprint.id}) }}"><i
@@ -43,12 +44,16 @@
                         </td>
                     </tr>
                 {% endfor %}
-                {{ form_start(delete_form) }}
-                <input class="boton boton-default" type="submit" value="Delete">
-                {{ form_end(delete_form) }}
+
             {% endblock %}
 
            {% block footer %}
+               <div class="text-right">
+                   {{ form_start(delete_form) }}
+                   <input class="boton boton-default" type="submit" value="Delete">
+                   {{ form_end(delete_form) }}
+               </div>
+
                <div id="chartContainer"></div>
 
                <script src="{{ asset('js/canvasjs.min.js') }}"></script>
@@ -64,26 +69,26 @@
                            data: [{
                                type: "line",
                                dataPoints: {{ array }}
-        //                               [
-        //                           {x: 10, y: 45},
-        //                           {x: 20, y: 14},
-        //                           {x: 30, y: 20},
-        //                           {x: 40, y: 60},
-        //                           {x: 50, y: 50},
-        //                           {x: 60, y: 80},
-        //                           {x: 70, y: 40},
-        //                           {x: 80, y: 60},
-        //                           {x: 90, y: 10},
-        //                           {x: 100, y: 50},
-        //                           {x: 110, y: 40},
-        //                           {x: 120, y: 14},
-        //                           {x: 130, y: 70},
-        //                           {x: 140, y: 40},
+                               //                               [
+                               //                           {x: 10, y: 45},
+                               //                           {x: 20, y: 14},
+                               //                           {x: 30, y: 20},
+                               //                           {x: 40, y: 60},
+                               //                           {x: 50, y: 50},
+                               //                           {x: 60, y: 80},
+                               //                           {x: 70, y: 40},
+                               //                           {x: 80, y: 60},
+                               //                           {x: 90, y: 10},
+                               //                           {x: 100, y: 50},
+                               //                           {x: 110, y: 40},
+                               //                           {x: 120, y: 14},
+                               //                           {x: 130, y: 70},
+                               //                           {x: 140, y: 40},
 //                           {x: 150, y: 90},
 //                       ]
-                   }]
-               });
-               chart.render();
-           }
-       </script>
-   {% endblock %}
+                           }]
+                       });
+                       chart.render();
+                   }
+               </script>
+           {% endblock %}

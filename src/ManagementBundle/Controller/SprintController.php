@@ -73,6 +73,7 @@ class SprintController extends Controller
 
         return $this->render('sprint/new.html.twig', array(
             'sprint' => $sprint,
+            'project' => $project,
             'form' => $form->createView(),
         ));
     }
@@ -80,7 +81,7 @@ class SprintController extends Controller
     /**
      * Finds and displays a Sprint entity.
      *
-     * @Route("/{id}", name="sprint_show")
+     * @Route("/show/{id}", name="sprint_show")
      * @Method("GET")
      */
     public function showAction(Sprint $sprint)

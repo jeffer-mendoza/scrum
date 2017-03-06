@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block panel_title %}Sprint New{% endblock %}
-{% block panel_actions %}<a class="boton boton-default" href="{{ path('sprint_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+{% block panel_actions %}<a class="boton boton-default" href="{{ path('sprint_index', {'id': project.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>{% endblock %}
 {% block panel_body %}
     {{ form_start(form) }}

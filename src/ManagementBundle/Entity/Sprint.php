@@ -161,7 +161,7 @@ class Sprint
     /**
      * Set project
      *
-     * @param \stdClass $project
+     * @param \ManagementBundle\Entity\Project $project
      * @return Sprint
      */
     public function setProject($project)
@@ -174,7 +174,7 @@ class Sprint
     /**
      * Get project
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Project
      */
     public function getProject()
     {

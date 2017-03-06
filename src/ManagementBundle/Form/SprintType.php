@@ -20,7 +20,6 @@ class SprintType extends AbstractType
             ->add('name')
             ->add('startDate', DateType::class,array('widget'=>'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'')))
             ->add('dueDate', DateType::class,array('widget'=>'single_text', 'format' => 'yyyy-MM-dd','attr'=>array('class'=>'')))
-            ->add('project')
         ;
     }
     

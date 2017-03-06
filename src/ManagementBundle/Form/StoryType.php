@@ -19,19 +19,20 @@ class StoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        //para obtener el objeto con el que se está construyendo el form
+        $project = $builder->getData()->getProject();
+        $idProject = $project->getId();
+        
         $builder
             ->add('title')
             ->add('rol', EntityType::class, array(
-                'class' => 'AppBundle:User',
-                'query_builder' => function (EntityRepository $er) {
-                    global $kernel;
-                    $token = $kernel->getContainer()->get('security.token_storage')->getToken();
-                    if (!is_object($user = $token->getUser())) {
-                        return null;
-                    }
+                'class' => 'ManagementBundle:Rol',
+                'placeholder' => 'Choose an rol',
+                'query_builder' => function (EntityRepository $er) use ($idProject) {
 
                     return $er->createQueryBuilder('r')
-                        ->where('r.project','p','WITH','r.project = 2');
+                        ->innerJoin('r.project', 'p', 'WITH', 'r.project = :project')
+                        ->setParameter('project', $idProject);
                 },
             ))
             ->add('want')
@@ -76,8 +77,26 @@ class StoryType extends AbstractType
                     '16' => '16h',
                 )
             ))
-            ->add('module')
-            ->add('sprint');
+            ->add('module', EntityType::class, array(
+                'class' => 'ManagementBundle:Module',
+                'placeholder' => 'Choose an module',
+                'query_builder' => function (EntityRepository $er) use ($idProject) {
+
+                    return $er->createQueryBuilder('m')
+                        ->innerJoin('m.project', 'p', 'WITH', 'm.project = :project')
+                        ->setParameter('project', $idProject);
+                },
+            ))
+            ->add('sprint', EntityType::class, array(
+                'class' => 'ManagementBundle:Sprint',
+                'placeholder' => 'Choose an sprint',
+                'query_builder' => function (EntityRepository $er) use ($idProject) {
+
+                    return $er->createQueryBuilder('s')
+                        ->innerJoin('s.project', 'p', 'WITH', 's.project = :project')
+                        ->setParameter('project', $idProject);
+                },
+            ));
     }
 
     /**

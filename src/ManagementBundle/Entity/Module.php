@@ -28,6 +28,13 @@ class Module
      */
     private $name;
 
+    /**
+     * @var \ManagementBundle\Entity\Project
+     *
+     * @ORM\ManyToOne(targetEntity="\ManagementBundle\Entity\Project", inversedBy="modules")
+     * @ORM\JoinColumn(name="project", referencedColumnName="id")
+     */
+    private $project;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -35,6 +42,7 @@ class Module
      * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Story", mappedBy="project")
      */
     private $stories;
+
 
     /**
      * Get id
@@ -68,6 +76,24 @@ class Module
     {
         return $this->name;
     }
+
+    /**
+     * @return Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+    }
+
+
 
     function __toString()
     {

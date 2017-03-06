@@ -2,6 +2,7 @@
 
 namespace ManagementBundle\Controller;
 
+use ManagementBundle\Form\CreateStoryType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -43,11 +44,10 @@ class StoryController extends Controller
      */
     public function newAction(Request $request, Project $project)
     {
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('ManagementBundle:Project')->find(1);
         $story = new Story();
         $story->setProject($project);
-        $form = $this->createForm('ManagementBundle\Form\CreateStoryType', $story);
+        $storyType = new CreateStoryType(array('project' => $project));
+        $form = $this->createForm($storyType, $story);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +68,7 @@ class StoryController extends Controller
     /**
      * Finds and displays a Story entity.
      *
-     * @Route("/{id}", name="story_show")
+     * @Route("/show/{id}", name="story_show")
      * @Method("GET")
      */
     public function showAction(Story $story)

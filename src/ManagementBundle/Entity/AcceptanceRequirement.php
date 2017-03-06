@@ -117,7 +117,7 @@ class AcceptanceRequirement
     /**
      * Set story
      *
-     * @param \stdClass $story
+     * @param \ManagementBundle\Entity\Story $story
      * @return AcceptanceRequirement
      */
     public function setStory($story)
@@ -130,7 +130,7 @@ class AcceptanceRequirement
     /**
      * Get story
      *
-     * @return \stdClass 
+     * @return \ManagementBundle\Entity\Story
      */
     public function getStory()
     {

@@ -2,7 +2,7 @@
 
 {% block panel_title %}Sprint list{% endblock %}
 {% block panel_actions %}
-    <a class="boton boton-default" href="{{ path('sprint_new') }}">New Sprint</a>
+    <a class="boton boton-default" href="{{ path('sprint_new',{'id':project.id}) }}">New Sprint</a>
 {% endblock %}
 
     {% block th %}

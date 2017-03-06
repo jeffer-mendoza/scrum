@@ -2,14 +2,13 @@
 
 {% block panel_title %}{{ story.title }} Edit{% endblock %}
 {% block panel_actions %}
-    <a class="waves-effect waves-light btn" href="{{ path('story_index') }}"><i class="fa fa-arrow-left"
-                                                                                aria-hidden="true"></i>
+    <a class="boton boton-default" href="{{ path('story_index',{'id': story.project.id}) }}">
+        <i class="fa fa-arrow-left"></i>
     </a>
-    {{ form_start(delete_form) }}
-    <input class="waves-effect waves-light btn" type="submit" value="Delete">
-    {{ form_end(delete_form) }}
+
 {% endblock %}
 {% block panel_body %}
+
     {{ form_start(edit_form) }}
     <div class="col l12">
         {{ form_row(edit_form.title) }}
@@ -44,4 +43,11 @@
 
     <input class="waves-effect waves-light btn" type="submit" value="Edit"/>
     {{ form_end(edit_form) }}
+
+    <div class="text-right">
+        {{ form_start(delete_form) }}
+        <input class="boton boton-default" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
+
 {% endblock %}

@@ -84,6 +84,12 @@ class Project
      */
     private $users;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Sprint", mappedBy="project")
+     */
+    private $modules;
 
     /**
      * Get id

@@ -30,18 +30,20 @@ class MeetController extends Controller
 
         return $this->render('meet/index.html.twig', array(
             'meets' => $meets,
+            'project' => $project
         ));
     }
 
     /**
      * Creates a new meet entity.
      *
-     * @Route("/new", name="meet_new")
+     * @Route("/new/{id}", name="meet_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Project $project)
     {
         $meet = new Meet();
+        $meet->setProject($project);
         $form = $this->createForm('ManagementBundle\Form\MeetType', $meet);
         $form->handleRequest($request);
 
@@ -55,6 +57,7 @@ class MeetController extends Controller
 
         return $this->render('meet/new.html.twig', array(
             'meet' => $meet,
+            'project' => $project,
             'form' => $form->createView(),
         ));
     }
@@ -62,7 +65,7 @@ class MeetController extends Controller
     /**
      * Finds and displays a meet entity.
      *
-     * @Route("/{id}", name="meet_show")
+     * @Route("/show/{id}", name="meet_show")
      * @Method("GET")
      */
     public function showAction(Meet $meet)
@@ -90,7 +93,7 @@ class MeetController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('meet_edit', array('id' => $meet->getId()));
+            return $this->redirectToRoute('meet_show', array('id' => $meet->getId()));
         }
 
         return $this->render('meet/edit.html.twig', array(

@@ -2,7 +2,7 @@
 
 {% block panel_title %}Meet list{% endblock %}
 {% block panel_actions %}
-    <a class="boton boton-default" href="{{ path('meet_new') }}">New Meet</a>
+    <a class="boton boton-default" href="{{ path('meet_new', {'id': project.id}) }}">New Meet</a>
 {% endblock %}
 
     {% block th %}

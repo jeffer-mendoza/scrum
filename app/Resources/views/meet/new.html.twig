@@ -1,11 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% block panel_title %}Meet New{% endblock %}
-{% block panel_actions %}<a class="boton boton-default" href="{{ path('meet_index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </a>{% endblock %}
+{% block panel_actions %}
+    <a class="boton boton-default" href="{{ path('meet_index', {'id': project.id}) }}">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+{% endblock %}
 {% block panel_body %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input class="waves-effect waves-light btn" type="submit" value="Create" />
+    <input class="waves-effect waves-light btn" type="submit" value="Create"/>
     {{ form_end(form) }}
 {% endblock %}

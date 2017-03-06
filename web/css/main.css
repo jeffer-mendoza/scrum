@@ -194,3 +194,11 @@ table {
 .collapsible-header {
     background-color: #2E2E2E !important;
 }
+
+.collapsible-header:hover {
+    background-color: #1C1C1C !important;
+}
+
+.collapsible{
+    border: none;
+}

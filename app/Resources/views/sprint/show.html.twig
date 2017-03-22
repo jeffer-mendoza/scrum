@@ -21,21 +21,17 @@
          {% block th %}
              <th>Id</th>
              <th>Title</th>
-             <th>Priority</th>
-             <th>Points</th>
-             <th>Status</th>
-             <th>Effort</th>
+             <th class="text-center">Status</th>
+             <th class="text-center">Points</th>
          {% endblock %}
 
             {% block td %}
-                {% for story in sprint.stories %}
+                {% for story in stories %}
                     <tr class="" title="{{ story.fullDescription }}">
                         <td>{{ story.id }}</td>
                         <td>{{ story.title }}</td>
-                        <td>{{ story.strpriority }}</td>
-                        <td>{{ story.points }}</td>
-                        <td>{{ story.strstatus }}</td>
-                        <td>{{ story.effort }}</td>
+                        <td class="text-center">{{ story.strstatus }}</td>
+                        <td class="text-center">{{ story.points }}</td>
                         <td>
                             <a class="waves-effect waves-light btn" href="{{ path('story_show', { 'id': story.id }) }}"><i
                                         class="fa fa-eye"></i></a>

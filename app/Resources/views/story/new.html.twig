@@ -2,7 +2,7 @@
 
 {% block panel_title %}Story Creation{% endblock %}
 {% block panel_actions %}
- <a class="btn" href="{{ path('story_index', {'id': project.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+ <a class="boton boton-default" href="{{ path('story_index', {'id': project.id}) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 {% endblock %}
 {% block panel_body %}
     {{ form_start(form) }}
@@ -28,15 +28,15 @@
         {{ form_row(form.status) }}
     </div>
 
-    <div class="col l4">
+    <div class="col l6">
         {{ form_row(form.sprint) }}
     </div>
-    <div class="col l4">
+    <div class="col l6">
         {{ form_row(form.module) }}
     </div>
-    <div class="col l4">
-        {{ form_row(form.effort) }}
-    </div>
+    {#<div class="col l4">#}
+        {#{{ form_row(form.effort) }}#}
+    {#</div>#}
     <input class="waves-effect waves-light btn" type="submit" value="Create"/>
     {{ form_end(form) }}
 {% endblock %}

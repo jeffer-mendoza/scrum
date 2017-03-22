@@ -657,6 +657,7 @@ class Story
     public function setPoints($points)
     {
         $this->points = $points;
+        $this->effort = $points * 8;
     }
 
     /**

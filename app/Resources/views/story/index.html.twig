@@ -11,10 +11,9 @@
     {% block th %}
         <th>id</th>
         <th>Title</th>
-        <th>Priority</th>
-        <th>Points</th>
-        <th>Status</th>
-        <th>Effort</th>
+        <th class="text-center">Priority</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Points</th>
     {% endblock %}
 
     {% block td %}
@@ -22,10 +21,9 @@
             <tr class="" title="{{story.fullDescription}}"   >
                 <td>{{ story.number }}</td>
                 <td>{{ story.title }}</td>
-                <td>{{ story.strpriority }}</td>
-                <td>{{ story.points }}</td>
-                <td>{{ story.strstatus }}</td>
-                <td>{{ story.effort }}</td>
+                <td class="text-center">{{ story.strpriority }}</td>
+                <td class="text-center">{{ story.strstatus }}</td>
+                <td class="text-center">{{ story.points }}</td>
                 <td>
                     <a class="btn" href="{{ path('story_show', { 'id': story.id }) }}">
                         <i class="fa fa-eye"></i>

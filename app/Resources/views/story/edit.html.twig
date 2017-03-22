@@ -31,15 +31,15 @@
     <div class="col l4">
         {{ form_row(edit_form.status) }}
     </div>
-    <div class="col l4">
+    <div class="col l6">
         {{ form_row(edit_form.sprint) }}
     </div>
-    <div class="col l4">
+    <div class="col l6">
         {{ form_row(edit_form.module) }}
     </div>
-    <div class="col l4">
-        {{ form_row(edit_form.effort) }}
-    </div>
+    {#<div class="col l4">#}
+        {#{{ form_row(edit_form.effort) }}#}
+    {#</div>#}
 
     <input class="waves-effect waves-light btn" type="submit" value="Edit"/>
     {{ form_end(edit_form) }}

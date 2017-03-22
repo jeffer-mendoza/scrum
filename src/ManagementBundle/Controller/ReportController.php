@@ -183,7 +183,8 @@ class ReportController extends Controller
      */
     public function sprintBacklogPdfAction(Sprint $sprint)
     {
-        $stories = $sprint->getStories();
+        $em = $this->getDoctrine()->getManager();
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('sprint' => $sprint->getId()), array('points' => 'DESC'));
 
         $html = $this->renderView('report/sprint-backlog.html.twig', array('sprint' => $sprint, 'stories' => $stories
         ));
@@ -209,7 +210,9 @@ class ReportController extends Controller
      */
     public function sprintBacklogImageAction(Sprint $sprint)
     {
-        $stories = $sprint->getStories();
+        $em = $this->getDoctrine()->getManager();
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('sprint' => $sprint->getId()), array('points' => 'DESC'));
+
 
         $html = $this->renderView('report/sprint-backlog-image.html.twig', array('sprint' => $sprint, 'stories' => $stories
         ));

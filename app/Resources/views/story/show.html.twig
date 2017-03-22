@@ -30,7 +30,7 @@
 
         <tr>
             <th>Sprint</th>
-            <td>{{ story.sprint }}</td>
+            <td><a href="{{ path('sprint_show', {'id': story.sprint.id}) }}">{{ story.sprint }}</a></td>
             <th>Module</th>
             <td>{{ story.module }}</td>
             <th>Effort(hrs)</th>

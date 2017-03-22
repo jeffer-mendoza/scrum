@@ -45,9 +45,9 @@ class Sprint
     /**
      * @var int
      *
-     * @ORM\Column(name="effort", type="smallint", nullable=true)
+     * @ORM\Column(name="points", type="smallint", nullable=true)
      */
-    private $effort;
+    private $points;
 
     /**
      * @var \DateTime
@@ -232,17 +232,17 @@ class Sprint
     /**
      * @return int
      */
-    public function getEffort()
+    public function getPoints()
     {
-        return $this->effort;
+        return $this->points;
     }
 
     /**
-     * @param $effort
+     * @param $points
      */
-    public function setEffort($effort)
+    public function setPoints($points)
     {
-        $this->effort = $effort;
+        $this->points = $points;
     }
 
 
@@ -259,7 +259,7 @@ class Sprint
         $effortTotal = 0;
         $arrayControl = array_fill(0,count($this->stories),0);//permite conocer que esfuerzos ya se habian agregado
         foreach ($this->stories as $story){
-            $effortTotal += $story->getEffort();
+            $effortTotal += $story->getPoints();
         }
         foreach ($this->stories as $story) {
             foreach ($story->getSpendEfforts() as $effort){

@@ -27,7 +27,7 @@ class SprintController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('id' => 'ASC'));
+        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('startDate' => 'ASC'));
 
         return $this->render('sprint/index.html.twig', array(
             'sprints' => $sprints,
@@ -91,8 +91,12 @@ class SprintController extends Controller
         $string = json_encode($array, JSON_NUMERIC_CHECK);
         $string = str_replace('"', '', $string);
 
+        $em = $this->getDoctrine()->getManager();
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('sprint' => $sprint->getId()), array('points' => 'DESC'));
+
         return $this->render('sprint/show.html.twig', array(
             'sprint' => $sprint,
+            'stories' => $stories,
             'delete_form' => $deleteForm->createView(),
             'array' => $string
         ));

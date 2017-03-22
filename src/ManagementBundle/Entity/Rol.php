@@ -24,7 +24,7 @@ class Rol
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=45, unique=true)
+     * @ORM\Column(name="name", type="string", length=45)
      */
     private $name;
 

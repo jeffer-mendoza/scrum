@@ -66,20 +66,20 @@ class CreateStoryType extends AbstractType
                     '40' => '?',
                 )
             ))
-            ->add('effort', ChoiceType::class, array(
-                'choices' => array(
-                    '0.5' => '1/2',
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '5' => '5',
-                    '8' => '8',
-                    '10' => '10',
-                    '13' => '13',
-                    '21' => '21',
-                    '40' => '?',
-                )
-            ))
+//            ->add('effort', ChoiceType::class, array(
+//                'choices' => array(
+//                    '0.5' => '1/2',
+//                    '1' => '1',
+//                    '2' => '2',
+//                    '3' => '3',
+//                    '5' => '5',
+//                    '8' => '8',
+//                    '10' => '10',
+//                    '13' => '13',
+//                    '21' => '21',
+//                    '40' => '?',
+//                )
+//            ))
             ->add('module', EntityType::class, array(
                 'class' => 'ManagementBundle:Module',
                 'placeholder' => 'Choose an module',

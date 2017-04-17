@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+
+{% block panel_actions %}
+    <a class="boton boton-default" href="{{ path('test_new', {'id': requeriment.id}) }}"><i
+    class="fa fa-plus" aria-hidden="true"></i> New Test </a>
+{% endblock %}
+
+{% block panel_title %}
+
+    {{ requeriment.story.title }}
+
+{% endblock %}
+
+{% block panel_body %}
+    <br>
+    <p>
+        {{ requeriment.description }}
+    </p>
+
+    <table class="table bordered striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Prerequisite</th>
+            <th>Steps</th>
+            <th>Expected</th>
+            <th>Obtained</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Automated</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for test in requeriment.tests %}
+            <tr>
+                <td><a href="{{ path('test_show', { 'id': test.id }) }}">{{ test.id }}</a></td>
+                <td>{{ test.name }}</td>
+                <td>{{ test.description }}</td>
+                <td>{{ test.prerequisite }}</td>
+                <td>{{ test.steps }}</td>
+                <td>{{ test.expected }}</td>
+                <td>{{ test.obtained }}</td>
+                <td>{{ test.status }}</td>
+                <td>{{ test.type }}</td>
+                <td>{% if test.automated %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('test_show', { 'id': test.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('test_edit', { 'id': test.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

@@ -80,3 +80,10 @@ knp_snappy:
         enabled:    true
         binary:     /usr/local/bin/wkhtmltoimage
         options:    []
+
+ivory_ck_editor:
+    configs:
+        my_config:
+            toolbar:                full
+            uiColor:                "#fff"
+            extraPlugins:           "wordcount"

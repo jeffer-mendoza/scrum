@@ -22,6 +22,13 @@ class AcceptanceRequirement
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="number", type="integer", nullable=true)
+     */
+    private $number;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=500)
@@ -45,9 +52,17 @@ class AcceptanceRequirement
 
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Test", mappedBy="story",cascade={"persist"})
+     */
+    private $tests;
+
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +85,7 @@ class AcceptanceRequirement
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -93,7 +108,7 @@ class AcceptanceRequirement
     /**
      * Get acceptance
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAcceptance()
     {
@@ -107,9 +122,9 @@ class AcceptanceRequirement
      */
     public function strAcceptance()
     {
-        if($this->acceptance){
+        if ($this->acceptance) {
             return "ACEPTADO";
-        }else{
+        } else {
             return "NO ACEPTADO";
         }
     }
@@ -136,4 +151,37 @@ class AcceptanceRequirement
     {
         return $this->story;
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $tests
+     */
+    public function setTests($tests)
+    {
+        $this->tests = $tests;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
+
 }

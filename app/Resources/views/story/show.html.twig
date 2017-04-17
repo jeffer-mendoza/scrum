@@ -38,38 +38,45 @@
         </tr>
 
     </table>
+    <table id="acceptance" class="bordered">
+        <thead>
+        <tr> Acceptance Requirements</tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th width="10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for acceptance in story.acceptanceRequirements %}
+            <tr>
+                <td>{{ acceptance.description }}</td>
+                <td>{{ acceptance.stracceptance }}</td>
+                <td>
+                    <a class="boton boton-default"
+                       href="{{ path('requeriment_show', { 'id': acceptance.id }) }}"><i
+                                class="fa fa-eye"></i> </a>
+                    <a class="boton boton-default"
+                       href="{{ path('acceptance_requirement_delete', { 'id': acceptance.id }) }}"><i
+                                class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <tr>
+        <td colspan="3">
+            <input id="save-acceptance-requirement" data-story="{{ story.id }}"
+                   data-url="{{ path('acceptancerequirement_new') }}" name="description"
+                   placeholder="Typing a new Acceptence Requirement...">
+        </td>
+    </tr>
 {% endblock %}
 
 {% block footer %}
     <ul class="collapsible" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header"><i class="fa fa-briefcase"></i>Acceptence Requirement</div>
-            <div class="collapsible-body">
-                <table id="acceptance" class="bordered">
-                    <tbody>
-                    {% for acceptance in story.acceptanceRequirements %}
-                        <tr>
-                            <td>{{ acceptance.description }}</td>
-                            <td>{{ acceptance.stracceptance }}</td>
-                            <td>
-                                <a class="btn"
-                                   href="{{ path('acceptance_requirement_delete', { 'id': acceptance.id }) }}"><i
-                                            class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
-                <tr>
-                    <td colspan="3">
-                        <input id="save-acceptance-requirement" data-story="{{ story.id }}"
-                               data-url="{{ path('acceptancerequirement_new') }}" name="description"
-                               placeholder="Typing a new Acceptence Requirement...">
-                    </td>
-                </tr>
-            </div>
-        </li>
         <li>
             <div class="collapsible-header"><i class="fa fa-tasks"></i>Tasks and Efforts</div>
             <div class="collapsible-body">
@@ -198,8 +205,8 @@
                 },
                 success: function (data) {
                     $('#acceptance').append(
-                            '<tr><td>' + $("#save-acceptance-requirement").val() + '</td>' +
-                            '<td>NO ACEPTADO</td></tr>');
+                        '<tr><td>' + $("#save-acceptance-requirement").val() + '</td>' +
+                        '<td>NO ACEPTADO</td></tr>');
                     $('#save-acceptance-requirement').val('');
                 }
             });

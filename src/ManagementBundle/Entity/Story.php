@@ -177,6 +177,13 @@ class Story
     private $acceptanceRequirements;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="\ManagementBundle\Entity\Test", mappedBy="story",cascade={"persist"})
+     */
+    private $tests;
+
+    /**
      * Get id
      *
      * @return integer
@@ -676,6 +683,20 @@ class Story
         $this->number = $number;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
 
+    /**
+     * @param ArrayCollection $tests
+     */
+    public function setTests($tests)
+    {
+        $this->tests = $tests;
+    }
 
 }

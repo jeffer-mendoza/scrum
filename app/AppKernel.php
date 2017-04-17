@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new ManagementBundle\ManagementBundle(),
             new UserBundle\UserBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

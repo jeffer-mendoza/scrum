@@ -1,3 +1,11 @@
+management_test:
+    resource: "@ManagementBundle/Controller/TestController.php"
+    type:     annotation
+
+management_test:
+    resource: "@ManagementBundle/Controller/TestController.php"
+    type:     annotation
+
 management_scrum:
     resource: "@ManagementBundle/Controller"
     type:     annotation

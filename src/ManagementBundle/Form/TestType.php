@@ -16,18 +16,14 @@ class TestType extends AbstractType
     {
         $builder->add('name')
             ->add('description')
-            ->add('prerequisite', CKEditorType::class, array(
-                'config_name' => 'my_config',
-            ))
-            ->add('steps', CKEditorType::class, array(
-                'config_name' => 'my_config',
-            ))
-            ->add('expected')
-            ->add('obtained')
+            ->add('data', 'ckeditor')
+            ->add('prerequisite', 'ckeditor')
+            ->add('steps', 'ckeditor')
+            ->add('expected', 'ckeditor')
+            ->add('obtained', 'ckeditor')
             ->add('status')
             ->add('type')
-            ->add('automated')
-            ->add('story')       ;
+            ->add('automated');
     }
     
     /**

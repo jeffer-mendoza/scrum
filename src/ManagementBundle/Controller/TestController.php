@@ -6,12 +6,14 @@ use ManagementBundle\Entity\AcceptanceRequirement;
 use ManagementBundle\Entity\Test;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use ManagementBundle\Entity\Story;
 
 /**
  * Test controller.
  *
- * @Route("test")
+ * @Route("/test")
  */
 class TestController extends Controller
 {
@@ -42,6 +44,7 @@ class TestController extends Controller
     {
         $test = new Test();
         $test->setAcceptanceRequirement($requirement);
+        $test->setStory($requirement->getStory());
         $form = $this->createForm('ManagementBundle\Form\TestType', $test);
         $form->handleRequest($request);
 
@@ -51,6 +54,33 @@ class TestController extends Controller
             $em->flush($test);
 
             return $this->redirectToRoute('test_show', array('id' => $test->getId()));
+        }
+
+        return $this->render('test/new.html.twig', array(
+            'test' => $test,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Creates a new test entity.
+     *
+     * @Route("/new/story/{id}", name="story_test_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newStoryAction(Request $request, Story $story)
+    {
+        $test = new Test();
+        $test->setStory($story);
+        $form = $this->createForm('ManagementBundle\Form\TestType', $test);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($test);
+            $em->flush($test);
+
+            return $this->redirectToRoute('story_show', array('id' => $story->getId()));
         }
 
         return $this->render('test/new.html.twig', array(
@@ -90,12 +120,12 @@ class TestController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('test_edit', array('id' => $test->getId()));
+            return $this->redirectToRoute('test_show', array('id' => $test->getId()));
         }
 
         return $this->render('test/edit.html.twig', array(
             'test' => $test,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

@@ -1,64 +1,62 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Test</h1>
-
-    <table>
+{% block panel_title %}Test Creation{% endblock %}
+{% block panel_actions %}
+    <a class="boton boton-default" href="{{ path('test_edit', {'id': test.id}) }}"><i class="fa fa-edit"></i></a>
+{% endblock %}
+{% block panel_body %}
+    <table class="tabla bordered">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ test.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ test.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ test.description }}</td>
-            </tr>
-            <tr>
-                <th>Prerequisite</th>
-                <td>{{ test.prerequisite }}</td>
-            </tr>
-            <tr>
-                <th>Steps</th>
-                <td>{{ test.steps }}</td>
-            </tr>
-            <tr>
-                <th>Expected</th>
-                <td>{{ test.expected }}</td>
-            </tr>
-            <tr>
-                <th>Obtained</th>
-                <td>{{ test.obtained }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ test.status }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ test.type }}</td>
-            </tr>
-            <tr>
-                <th>Automated</th>
-                <td>{% if test.automated %}Yes{% else %}No{% endif %}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ test.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ test.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ test.description }}</td>
+        </tr>
+        <tr>
+            <th>Data</th>
+            <td>{{ test.data }}</td>
+        </tr>
+        <tr>
+            <th>Prerequisite</th>
+            <td>{{ test.prerequisite|raw }}</td>
+        </tr>
+        <tr>
+            <th>Steps</th>
+            <td>{{ test.steps|raw }}</td>
+        </tr>
+        <tr>
+            <th>Expected</th>
+            <td>{{ test.expected|raw }}</td>
+        </tr>
+        <tr>
+            <th>Obtained</th>
+            <td>{{ test.obtained|raw }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ test.status }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ test.type }}</td>
+        </tr>
+        <tr>
+            <th>Automated</th>
+            <td>{% if test.automated %}Yes{% else %}No{% endif %}</td>
+        </tr>
         </tbody>
     </table>
+    <div class="text-right">
+        {{ form_start(delete_form) }}
+        <input class="boton boton-default" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('test_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('test_edit', { 'id': test.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

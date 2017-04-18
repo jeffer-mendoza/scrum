@@ -6,7 +6,12 @@
 {% endblock %}
 {% block panel_body %}
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+
+    {{ form_widget(form.automated) }}
+    {{ form_label(form.automated) }}
+
+    {{ form_rest(form) }}
+
+    <input class="btn" type="submit" value="Create"/>
     {{ form_end(form) }}
 {% endblock %}

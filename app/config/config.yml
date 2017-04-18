@@ -85,5 +85,6 @@ ivory_ck_editor:
     configs:
         my_config:
             toolbar:                full
-            uiColor:                "#fff"
+            uiColor:                "#1C1C1C"
+            filebrowserUploadRoute: "my_route"
             extraPlugins:           "wordcount"

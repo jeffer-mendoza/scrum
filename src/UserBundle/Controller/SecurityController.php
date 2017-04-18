@@ -49,8 +49,7 @@ class SecurityController extends BaseController
 
         $this->container->get('security.context')->setToken(null);
 
-        return $this->redirect($this->generateUrl('login'));
-
+        return $this->redirect('login');
     }
 
 
@@ -80,7 +79,7 @@ class SecurityController extends BaseController
             return new RedirectResponse($this->generateUrl("management_homepage"));
         }
 
-        return new RedirectResponse($this->generateUrl("index"));
+        return new RedirectResponse($this->generateUrl("login"));
     }
 
     /**
@@ -163,6 +162,5 @@ class SecurityController extends BaseController
 
         return $ip >= $inf && $ip <= $sup;
     }
-
 
 }

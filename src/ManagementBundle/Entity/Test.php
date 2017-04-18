@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AcceptanceRequirement
  *
  * @ORM\Table(name="test")
- * @ORM\Entity(repositoryClass="ManagementBundle\Repository\Test")
+ * @ORM\Entity(repositoryClass="ManagementBundle\Repository\TestRepository")
  */
 class Test
 {
@@ -34,6 +34,14 @@ class Test
      * @ORM\Column(name="description", type="string", length=5000)
      */
     private $description;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data", type="string", length=5000, nullable=true)
+     */
+    private $data;
 
     /**
      * @var string
@@ -290,6 +298,20 @@ class Test
     public function setAcceptanceRequirement($acceptance_requirement)
     {
         $this->acceptance_requirement = $acceptance_requirement;
+    }
+
+    /**
+     * @return string
+     */
+    public function getData() {
+        return $this->data;
+    }
+
+    /**
+     * @param string $data
+     */
+    public function setData($data) {
+        $this->data = $data;
     }
 
 }

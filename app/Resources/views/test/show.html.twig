@@ -3,6 +3,7 @@
 {% block panel_title %}Test Creation{% endblock %}
 {% block panel_actions %}
     <a class="boton boton-default" href="{{ path('test_edit', {'id': test.id}) }}"><i class="fa fa-edit"></i></a>
+    <a class="boton boton-default" href="{{ path('story_show', {'id': test.story.id}) }}">Story</a>
 {% endblock %}
 {% block panel_body %}
     <table class="tabla bordered">
@@ -21,7 +22,7 @@
         </tr>
         <tr>
             <th>Data</th>
-            <td>{{ test.data }}</td>
+            <td>{{ test.data|raw }}</td>
         </tr>
         <tr>
             <th>Prerequisite</th>

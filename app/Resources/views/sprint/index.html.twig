@@ -15,7 +15,7 @@
     {% block td %}
         {% for sprint in sprints %}
             <tr>
-                <td>{{ sprint.id }}</td>
+                <td>{{ sprint.number }}</td>
                 <td>{{ sprint.name }}</td>
                 <td>{% if sprint.startDate %}{{ sprint.startDate|date('d-M-Y H:i') }}{% endif %}</td>
                 <td>{% if sprint.dueDate %}{{ sprint.dueDate|date('d-M-Y H:i') }}{% endif %}</td>

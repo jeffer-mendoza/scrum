@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
         {% block panel_title %}
-            {{ sprint.id }} - {{ sprint.name }}
+            {{ sprint.number }} - {{ sprint.name }}
             <h6> Fecha Inicio: {% if sprint.startDate %}{{ sprint.startDate|date('d \\d\\e M \\d\\e Y') }}{% endif %}
                 al {% if sprint.dueDate %}{{ sprint.dueDate|date('d \\d\\e M \\d\\e Y') }}{% endif %}
             </h6>
@@ -28,7 +28,7 @@
             {% block td %}
                 {% for story in stories %}
                     <tr class="" title="{{ story.fullDescription }}">
-                        <td>{{ story.id }}</td>
+                        <td>{{ story.number }}</td>
                         <td>{{ story.title }}</td>
                         <td class="text-center">{{ story.strstatus }}</td>
                         <td class="text-center">{{ story.points }}</td>

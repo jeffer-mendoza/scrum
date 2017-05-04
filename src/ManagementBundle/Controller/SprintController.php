@@ -27,7 +27,7 @@ class SprintController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('startDate' => 'ASC'));
+        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array('project' => $project->getId()), array('number' => 'ASC'));
 
         return $this->render('sprint/index.html.twig', array(
             'sprints' => $sprints,
@@ -43,7 +43,7 @@ class SprintController extends Controller
     public function sprintsAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $sprints = $em->getRepository('ManagementBundle:Sprint')->findAll();
+        $sprints = $em->getRepository('ManagementBundle:Sprint')->findBy(array(), array('number' => 'ASC'));
 
         return $this->render('sprint/sprints.html.twig', array(
             'sprints' => $sprints,

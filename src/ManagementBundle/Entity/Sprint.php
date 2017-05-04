@@ -24,6 +24,13 @@ class Sprint
     /**
      * @var string
      *
+     * @ORM\Column(name="number", type="smallint", nullable=true)
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
@@ -243,6 +250,20 @@ class Sprint
     public function setPoints($points)
     {
         $this->points = $points;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumber() {
+        return $this->number;
+    }
+
+    /**
+     * @param string $number
+     */
+    public function setNumber($number) {
+        $this->number = $number;
     }
 
 

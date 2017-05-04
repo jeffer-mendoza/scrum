@@ -216,7 +216,7 @@ class ReportController extends Controller
 
         $html = $this->renderView('report/sprint-backlog-image.html.twig', array('sprint' => $sprint, 'stories' => $stories
         ));
-        $nameFile = "iteration-".$sprint->getId()."-".strtolower($sprint->getName())."-sprint.jpg";
+        $nameFile = "iteration-".$sprint->getNumber().".jpg";
 
         return new Response(
             $this->get('knp_snappy.image')->getOutputFromHtml($html),

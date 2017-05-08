@@ -21,7 +21,7 @@
                     <strong style="font-size: 26px">Sistema Para la Gestión de Documentos Electrónicos</strong><br/>
                     <strong style="font-size: 22px">Área de Registro Académico</strong><br/>
                     <strong style="font-size: 20px">Sprint: {{ sprint.name }}</strong><br/>
-                    <strong style="font-size: 20px">Iteración No. {{ sprint.id }}</strong><br/>
+                    <strong style="font-size: 20px">Iteración No. {{ sprint.number }}</strong><br/>
                 </td>
             </tr>
         </table>
@@ -30,7 +30,7 @@
                 <th style="width: 20%">Nombre</th>
                 <td>{{ sprint.name }}</td>
                 <th>Iteración No.</th>
-                <td>{{ sprint.id }}</td>
+                <td>{{ sprint.number}}</td>
             </tr>
             <tr>
                 <th>Duración</th>
@@ -102,11 +102,11 @@
                 </td>
             </tr>
         </table>
-        <p style="font-size: 9.5px">
-            Escuela de Ingeniería de Sistemas y Computación - Universidad del Valle<br/>
-            Trabajo de Grado: Sistema Para la Gestión de Documentos Electrónicos - Jefferson Estiven Mendoza<br/>
-            Santiago de Cali 2016 - 2017
-        </p>
+        {#<p style="font-size: 9.5px">#}
+            {#Escuela de Ingeniería de Sistemas y Computación - Universidad del Valle<br/>#}
+            {#Trabajo de Grado: Sistema Para la Gestión de Documentos Electrónicos - Jefferson Estiven Mendoza<br/>#}
+            {#Santiago de Cali 2016 - 2017#}
+        {#</p>#}
     </div>
     <style>
         #detail td {

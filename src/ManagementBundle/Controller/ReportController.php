@@ -129,7 +129,7 @@ class ReportController extends Controller
         $html = $this->renderView('report/pdf.html.twig', array(
             'story' => $story
         ));
-        $nameFile = "GD" . $story->getId() . ".pdf";
+        $nameFile = "GD" . $story->getNumber() . ".pdf";
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -159,7 +159,7 @@ class ReportController extends Controller
         $html = $this->renderView('report/image.html.twig', array(
             'story' => $story
         ));
-        $nameFile = "GD" . $story->getId() . ".jpg";
+        $nameFile = "GD" . $story->getNumber() . ".jpg";
 
         return new Response(
             $this->get('knp_snappy.image')->getOutputFromHtml($html),
@@ -188,7 +188,7 @@ class ReportController extends Controller
 
         $html = $this->renderView('report/sprint-backlog.html.twig', array('sprint' => $sprint, 'stories' => $stories
         ));
-        $nameFile = "iteration-".$sprint->getId()."-".strtolower($sprint->getName())."-sprint.jpg";
+        $nameFile = "sedoc-iteracion-".$sprint->getNumber().".pdf";
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -216,7 +216,7 @@ class ReportController extends Controller
 
         $html = $this->renderView('report/sprint-backlog-image.html.twig', array('sprint' => $sprint, 'stories' => $stories
         ));
-        $nameFile = "iteration-".$sprint->getNumber().".jpg";
+        $nameFile = "sedoc-iteracion-".$sprint->getNumber().".jpg";
 
         return new Response(
             $this->get('knp_snappy.image')->getOutputFromHtml($html),

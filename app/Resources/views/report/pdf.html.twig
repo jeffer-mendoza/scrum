@@ -26,7 +26,7 @@
         </table>
         <table id="detail" class="table table-bordered table-striped table-responsive">
             <tr>
-                <td><h4>GD{{ story.id }}</h4></td>
+                <td><h4>GD{{ story.number }}</h4></td>
                 <td style="text-align: center" colspan="5"><h4>{{ story.title }}</h4></td>
             </tr>
             <tr>
@@ -39,11 +39,9 @@
             </tr>
             <tr>
                 <th>Sprint</th>
-                <td class="text-center">{{ story.sprint }}</td>
-                <th class="text-center">Modulo</th>
-                <td class="text-center">{{ story.module }}</td>
-                <th class="text-center">Esfuerzo</th>
-                <td class="text-center">{{ story.effort }} horas</td>
+                <td colspan="2" class="text-center">{{ story.sprint }}</td>
+                <th class="text-center">Módulo</th>
+                <td colspan="2" class="text-center">{{ story.module }}</td>
             </tr>
             <tr>
                 <th>Descripcion</th>
@@ -52,53 +50,17 @@
             <tr>
                 <th class="text-center" colspan="6">Criterios de Aceptación</th>
             </tr>
-            <tr>
-                {% if story.comments|length > 0 %}
-                    <th colspan="5">Descripción</th>
-                    <th colspan="1">Estado</th>
-                {% else %}
-                    <td class="text-center" colspan="6">Sin criterios de aceptación</td>
-                {% endif %}
-            </tr>
-            <tbody>
             {% for acceptance in story.acceptanceRequirements %}
                 <tr>
                     <td colspan="5">{{ acceptance.description }}</td>
                     <td colspan="1">{{ acceptance.stracceptance }}</td>
                 </tr>
+            {% else %}
+                <tr>
+                    <td class="text-center" colspan="6">Sin criterios de aceptación</td>
+                </tr>
             {% endfor %}
-            {#<tr>#}
-                {#<th class="text-center" colspan="6">Esfuerzo Requerido</th>#}
-            {#</tr>#}
-            {#<tr>#}
-                {#{% if story.comments|length > 0 %}#}
-                    {#<th colspan="1">Esfuerzo(hrs)</th>#}
-                    {#<th colspan="5">Fecha</th>#}
-                {#{% else %}#}
-                    {#<td class="text-center" colspan="6">Sin esfuerzos requeridos</td>#}
-                {#{% endif %}#}
-            {#</tr>#}
-            {#{% for effort in story.spendEfforts %}#}
-                {#<tr>#}
-                    {#<td colspan="1">{{ effort.effort }}</td>#}
-                    {#<td colspan="5">{% if story.startDate %}{{ story.startDate|date('d-M-Y H:i:s') }}{% endif %}</td>#}
-                {#</tr>#}
-            {#{% endfor %}#}
-            {#<tr>#}
-                {#<th class="text-center" colspan="6">Comentarios</th>#}
-            {#</tr>#}
-            {#<tr>#}
-                {#{% if story.comments|length > 0 %}#}
-                    {#<th colspan="6">Detalle</th>#}
-                {#{% else %}#}
-                    {#<td class="text-center" colspan="6">Sin comentarios</td>#}
-                {#{% endif %}#}
-            {#</tr>#}
-            {#{% for comment in story.comments %}#}
-                {#<tr>#}
-                    {#<td colspan="6">{{ comment.detail }}</td>#}
-                {#</tr>#}
-            {#{% endfor %}#}
+
         </table>
     </div>
     <div style="width: 793px;font-family: Arial, 'Times New Roman'">
@@ -124,14 +86,14 @@
                 </td>
             </tr>
         </table>
-        <p style="font-size: 9.5px">
-            Escuela de Ingeniería de Sistemas y Computación - Universidad del Valle<br/>
-            Trabajo de Grado: Sistema Para la Gestión de Documentos Electrónicos - Jefferson Estiven Mendoza<br/>
-            Santiago de Cali 2016 - 2017
-        </p>
+        {#<p style="font-size: 9.5px">#}
+            {#Escuela de Ingeniería de Sistemas y Computación - Universidad del Valle<br/>#}
+            {#Trabajo de Grado: Sistema Para la Gestión de Documentos Electrónicos - Jefferson Estiven Mendoza<br/>#}
+            {#Santiago de Cali 2016 - 2017#}
+        {#</p>#}
     </div>
     <style>
-        #detail td{
+        #detail td {
             width: 16.6%;
         }
     </style>

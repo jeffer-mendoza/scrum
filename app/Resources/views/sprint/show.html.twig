@@ -23,6 +23,8 @@
              <th>Title</th>
              <th class="text-center">Status</th>
              <th class="text-center">Points</th>
+             <th class="text-center">Acceptance</th>
+             <th class="text-center">Test</th>
          {% endblock %}
 
             {% block td %}
@@ -32,6 +34,8 @@
                         <td>{{ story.title }}</td>
                         <td class="text-center">{{ story.strstatus }}</td>
                         <td class="text-center">{{ story.points }}</td>
+                        <td class="text-center">{{ story.acceptanceRequirements|length }}</td>
+                        <td class="text-center">{{ story.tests|length }}</td>
                         <td>
                             <a class="waves-effect waves-light btn" href="{{ path('story_show', { 'id': story.id }) }}"><i
                                         class="fa fa-eye"></i></a>
@@ -49,42 +53,4 @@
                    <input class="boton boton-default" type="submit" value="Delete">
                    {{ form_end(delete_form) }}
                </div>
-
-               <div id="chartContainer"></div>
-
-               <script src="{{ asset('js/canvasjs.min.js') }}"></script>
-               <script type="text/javascript">
-                   window.onload = function () {
-                       var chart = new CanvasJS.Chart("chartContainer", {
-                           title: {
-                               text: "Burndown"
-                           },
-                           axisX: {
-                               interval: 10
-                           },
-                           data: [{
-                               type: "line",
-                               dataPoints: {{ array }}
-                               //                               [
-                               //                           {x: 10, y: 45},
-                               //                           {x: 20, y: 14},
-                               //                           {x: 30, y: 20},
-                               //                           {x: 40, y: 60},
-                               //                           {x: 50, y: 50},
-                               //                           {x: 60, y: 80},
-                               //                           {x: 70, y: 40},
-                               //                           {x: 80, y: 60},
-                               //                           {x: 90, y: 10},
-                               //                           {x: 100, y: 50},
-                               //                           {x: 110, y: 40},
-                               //                           {x: 120, y: 14},
-                               //                           {x: 130, y: 70},
-                               //                           {x: 140, y: 40},
-//                           {x: 150, y: 90},
-//                       ]
-                           }]
-                       });
-                       chart.render();
-                   }
-               </script>
            {% endblock %}

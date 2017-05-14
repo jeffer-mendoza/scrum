@@ -14,6 +14,8 @@
         <th class="text-center">Priority</th>
         <th class="text-center">Status</th>
         <th class="text-center">Points</th>
+        <th class="text-center">Acceptance</th>
+        <th class="text-center">Test</th>
     {% endblock %}
 
     {% block td %}
@@ -24,6 +26,8 @@
                 <td class="text-center">{{ story.strpriority }}</td>
                 <td class="text-center">{{ story.strstatus }}</td>
                 <td class="text-center">{{ story.points }}</td>
+                <td class="text-center">{{ story.acceptanceRequirements|length }}</td>
+                <td class="text-center">{{ story.tests|length }}</td>
                 <td>
                     <a class="btn" href="{{ path('story_show', { 'id': story.id }) }}">
                         <i class="fa fa-eye"></i>

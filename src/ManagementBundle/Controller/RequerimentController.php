@@ -37,7 +37,7 @@ class RequerimentController extends Controller
     /**
      * Displays a form to edit an existing Story entity.
      *
-     * @Route("/{id}/edit", name="requirement_edit")
+     * @Route("/{id}/edit", name="requeriment_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, AcceptanceRequirement $requirement)

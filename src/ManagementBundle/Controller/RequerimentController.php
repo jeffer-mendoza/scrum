@@ -37,21 +37,21 @@ class RequerimentController extends Controller
     /**
      * Displays a form to edit an existing Story entity.
      *
-     * @Route("/{id}/edit", name="story_edit")
+     * @Route("/{id}/edit", name="requirement_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Story $story)
+    public function editAction(Request $request, AcceptanceRequirement $requirement)
     {
-        $deleteForm = $this->createDeleteForm($story);
-        $editForm = $this->createForm('ManagementBundle\Form\StoryType', $story);
+        $deleteForm = $this->createDeleteForm(requeriment);
+        $editForm = $this->createForm('ManagementBundle\Form\RequirementType', $requirement);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($story);
+            $em->persist($requirement);
             $em->flush();
 
-            return $this->redirectToRoute('story_show', array('id' => $story->getId()));
+            return $this->redirectToRoute('story_show', array('id' => $requirement->getStory()->getId()));
         }
 
         return $this->render('story/edit.html.twig', array(
@@ -64,21 +64,21 @@ class RequerimentController extends Controller
     /**
      * Deletes a Story entity.
      *
-     * @Route("/{id}", name="story_delete")
+     * @Route("/{id}", name="requirement_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Story $story)
+    public function deleteAction(Request $request, AcceptanceRequirement $requirement)
     {
-        $form = $this->createDeleteForm($story);
+        $form = $this->createDeleteForm($requirement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($story);
+            $em->remove($requirement);
             $em->flush();
         }
 
-        return $this->redirectToRoute('story_index',array('id' => $story->getProject()->getId()));
+        return $this->redirectToRoute('story_show',array('id' => $requirement->getStory()->getId()));
     }
 
     /**
@@ -88,10 +88,10 @@ class RequerimentController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Story $story)
+    private function createDeleteForm(AcceptanceRequirement $requirement)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('story_delete', array('id' => $story->getId())))
+            ->setAction($this->generateUrl('requeriment_delete', array('id' => $requirement->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

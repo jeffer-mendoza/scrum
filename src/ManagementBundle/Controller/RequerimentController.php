@@ -42,7 +42,7 @@ class RequerimentController extends Controller
      */
     public function editAction(Request $request, AcceptanceRequirement $requirement)
     {
-        $deleteForm = $this->createDeleteForm(requeriment);
+        $deleteForm = $this->createDeleteForm($requirement);
         $editForm = $this->createForm('ManagementBundle\Form\RequirementType', $requirement);
         $editForm->handleRequest($request);
 
@@ -54,8 +54,7 @@ class RequerimentController extends Controller
             return $this->redirectToRoute('story_show', array('id' => $requirement->getStory()->getId()));
         }
 
-        return $this->render('story/edit.html.twig', array(
-            'story' => $story,
+        return $this->render('requeriment/edit.html.twig', array(
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +90,7 @@ class RequerimentController extends Controller
     private function createDeleteForm(AcceptanceRequirement $requirement)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('requeriment_delete', array('id' => $requirement->getId())))
+            ->setAction($this->generateUrl('requirement_delete', array('id' => $requirement->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

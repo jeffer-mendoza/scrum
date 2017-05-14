@@ -8,9 +8,16 @@
 {% endblock %}
 
 {% block panel_body %}
-    
-    {{form(edit_form)}}
-    
-    {{form(delete_form)}}
+
+    {{ form_start(edit_form) }}
+       {{ form_rest(edit_form) }}
+    <input class="waves-effect waves-light btn" type="submit" value="Edit"/>
+    {{ form_end(edit_form) }}
+
+    <div class="text-right">
+        {{ form_start(delete_form) }}
+        <input class="boton boton-default" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
 
 {% endblock %}

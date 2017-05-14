@@ -202,3 +202,31 @@ table {
 .collapsible{
     border: none;
 }
+
+.boton-group,
+.boton-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.boton-group > .btn,
+.boton-group-vertical > .btn {
+    position: relative;
+    float: left;
+}
+.boton-group > .btn:hover,
+.boton-group-vertical > .btn:hover,
+.boton-group > .btn:focus,
+.boton-group-vertical > .btn:focus,
+.boton-group > .btn:active,
+.boton-group-vertical > .btn:active,
+.boton-group > .btn.active,
+.boton-group-vertical > .btn.active {
+    z-index: 2;
+}
+.boton-group .btn + .btn,
+.boton-group .btn + .boton-group,
+.boton-group .boton-group + .btn,
+.boton-group .boton-group + .boton-group {
+    margin-left: -1px;
+}

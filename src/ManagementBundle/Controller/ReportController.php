@@ -157,7 +157,7 @@ class ReportController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array(), array('id' => 'ASC'));
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('sprint' => array(1,2,3,4,7)), array('id' => 'ASC'));
 
         $html = $this->renderView('report/product-backlog-image.html.twig', array( 'stories' => $stories
         ));

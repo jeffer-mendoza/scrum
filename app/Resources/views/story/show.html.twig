@@ -199,6 +199,8 @@
                                     <td>
                                         <a class="boton btn-default" href="{{ path('test_show', { 'id': test.id }) }}"><i
                                                     class="fa fa-eye"></i></a>
+                                        <a class="boton boton-default" href="{{ path('report_test_pdf', {'id': test.id}) }}"><i
+                                                    class="fa fa-file-pdf-o"></i> </a>
                                     </td>
                                 </tr>
                             {% endfor %}

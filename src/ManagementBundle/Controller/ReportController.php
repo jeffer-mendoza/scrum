@@ -11,6 +11,7 @@ use ManagementBundle\Form\ProjectType;
 use Symfony\Component\HttpFoundation\Response;
 use ManagementBundle\Entity\Story;
 use ManagementBundle\Entity\Sprint;
+use ManagementBundle\Entity\Test;
 
 /**
  * Project controller.
@@ -56,7 +57,64 @@ class ReportController extends Controller
             )
         );
 
-        return $this->render('report/pdf.html.twig', array('story' => $story));
+
+    }
+
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/story-generate/pdf", name="report_stories_generate_pdf")
+     * @Method("GET")
+     * @return Response
+     */
+    public function storiesGeneratePdfAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $stories = $em->getRepository('ManagementBundle:Story')->findBy(array('project' => 1));
+
+      foreach ($stories as $story) {
+          $html = $this->renderView('report/pdf.html.twig', array(
+              'story' => $story
+          ));
+          $nameFile = "SD" . $story->getNumber() . ".pdf";
+
+          $this->get('knp_snappy.pdf')->generateFromHtml(
+              $html,
+              '/home/jeffer/SD/'.$nameFile
+          );
+      }
+
+        return $this->redirectToRoute('story_index', array('id' => 1 ));
+
+    }
+
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/test-generate/pdf", name="report_tests_generate_pdf")
+     * @Method("GET")
+     * @return Response
+     */
+    public function testsGeneratePdfAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tests = $em->getRepository('ManagementBundle:Test')->findAll();
+
+        foreach ($tests as $test) {
+            $html = $this->renderView('report/test-pdf.html.twig', array(
+                'test' => $test
+            ));
+            $nameFile = "SDT" . $test->getNumber() . ".pdf";
+
+            $this->get('knp_snappy.pdf')->generateFromHtml(
+                $html,
+                '/home/jeffer/SD/test/'.$nameFile
+            );
+        }
+
+        return $this->redirectToRoute('story_index', array('id' => 1 ));
 
     }
 
@@ -129,7 +187,7 @@ class ReportController extends Controller
         $html = $this->renderView('report/pdf.html.twig', array(
             'story' => $story
         ));
-        $nameFile = "GD" . $story->getNumber() . ".pdf";
+        $nameFile = "SD" . $story->getNumber() . ".pdf";
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -223,6 +281,32 @@ class ReportController extends Controller
             200,
             array(
                 'Content-Type' => 'image/jpg',
+                'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
+            )
+        );
+
+    }
+
+    /**
+     * Generate user story in pdf format
+     *
+     * @Route("/test/{id}/pdf", name="report_test_pdf")
+     * @Method("GET")
+     * @return Response
+     */
+    public function testPdfAction(Test $test)
+    {
+
+        $html = $this->renderView('report/test-pdf.html.twig', array(
+            'test' => $test
+        ));
+        $nameFile = "SDT" . $test->getId() . ".pdf";
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'attachment; filename="' . $nameFile . '"'
             )
         );

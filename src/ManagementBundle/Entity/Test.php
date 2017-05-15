@@ -24,6 +24,13 @@ class Test
     /**
      * @var string
      *
+     * @ORM\Column(name="number", type="smallint", nullable=true)
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=500)
      */
     private $name;
@@ -312,6 +319,20 @@ class Test
      */
     public function setData($data) {
         $this->data = $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumber() {
+        return $this->number;
+    }
+
+    /**
+     * @param string $number
+     */
+    public function setNumber($number) {
+        $this->number = $number;
     }
 
 }

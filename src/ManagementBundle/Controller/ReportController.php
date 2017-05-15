@@ -300,7 +300,7 @@ class ReportController extends Controller
         $html = $this->renderView('report/test-pdf.html.twig', array(
             'test' => $test
         ));
-        $nameFile = "SDT" . $test->getId() . ".pdf";
+        $nameFile = "SDT" . $test->getNumber() . ".pdf";
 
         return new Response(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
